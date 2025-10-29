@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <title>Gallery - Christian Café</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #F5F5F0;
+      color: #3E6148;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /********** NAVBAR **********/
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #F5F5F0;
+      height: 70px;
+      padding: 0 30px;
+      z-index: 10;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #347433;
+    }
+
+    .header-class {
+      height: 60px;
+      width: auto;
+    }
+
+    .header-class img {
+      height: 100%;
+      width: auto;
+      object-fit: contain;
+    }
+
+    /********** HEADER **********/
+    .header {
+      width: 100%;
+      height: 30vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(
+        180deg,
+        rgba(93, 134, 108, 1) 9%,
+        rgba(245, 245, 240, 1) 25%,
+        rgba(194, 166, 140, 1) 100%
+      );
+      padding: 20px;
+    }
+
+    .header h1 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 3rem;
+    }
+
+    .header h4 {
+      font-weight: 300;
+      font-size: 1rem;
+    }
+
+    /********** CONTENT **********/
+    .content {
+      margin: 40px auto;
+      max-width: 1200px;
+      width: 90%;
+      flex: 1;
+    }
+
+    .timeline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .timeline > div {
+      border-radius: 15px;
+      border: 1px solid #d1d5db;
+      padding: 6px 12px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      background-color: white;
+      transition: background-color 0.2s ease;
+    }
+
+    .timeline > div:hover {
+      background-color: #e8f0e8;
+    }
+
+    .flex-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .folder {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .folder:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .cover {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .folder h4 {
+      margin: 10px 20px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #347433;
+    }
+
+    .folder p {
+      margin: 5px 20px 15px;
+      font-size: 0.9rem;
+      color: gray;
+    }
+
+    /********** FOOTER **********/
+    footer {
+      background-color: #4F8355;
+      padding: 15px 0;
+      color: white;
+      text-align: center;
+      margin-top: auto;
+    }
+
+    .footerContainer1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footerContainer1 img {
+      width: 45px;
+      height: 45px;
+      background-color: white;
+      border-radius: 5px;
+      object-fit: contain;
+    }
+
+    .footerContainer1 h3 {
+      font-size: 1rem;
+      font-weight: 400;
+    }
+
+    .socialIcons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
+    .socialIcons a i {
+      font-size: 1.2rem;
+      color: white;
+      opacity: 0.9;
+      transition: color 0.3s ease;
+    }
+
+    .socialIcons a i:hover {
+      color: #E2C88D;
+    }
+
+    /********** RESPONSIVENESS **********/
+    @media (max-width: 1024px) {
+      .nav-links {
+        gap: 25px;
+      }
+      .header h1 {
+        font-size: 2.5rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+        padding-top: 10px;
+      }
+
+      .header h1 {
+        font-size: 2rem;
+      }
+
+      .header h4 {
+        font-size: 0.9rem;
+      }
+
+      .folder h4 {
+        font-size: 1rem;
+      }
+
+      .folder p {
+        font-size: 0.85rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.6rem;
+      }
+
+      .header h4 {
+        font-size: 0.8rem;
+      }
+
+      .timeline > div {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="header-class">
+        <img src="../images/logojccnew 2.png" alt="JCC Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../About/About.html">About Us</a></li>
+        <li><a href="../Merch/merch.html">Pre-Sale Merch</a></li>
+        <li><a href="../index.html">Countdown</a></li>
+        <li><a href="../Gallery/Gallery.html">Gallery</a></li>
+        <li><a href="../Contact/contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="header">
+    <h1>Gallery</h1>
+    <h4>Moments from Christian Café — testimonies, worship, and service</h4>
+  </div>
+
+  <main class="content">
+    <div class="timeline">
+      <div>All</div>
+      <div>Conference</div>
+      <div>Worship Night</div>
+      <div>Outreach</div>
+      <div>Youth</div>
+      <div>2025</div>
+      <div>2024</div>
+    </div>
+
+    <div class="flex-container">
+      <div class="folder">
+        <img class="cover" src="../images/ATL_SKYL.jpg" alt="Atlanta Conference" />
+        <h4>Christian Café - Atlanta Conference</h4>
+        <p>June 14-16, 2024</p>
+      </div>
+
+      <div class="folder">
+        <img class="cover" src="../images/ATL_SKYL.jpg" alt="Worship Night NYC" />
+        <h4>Worship Night - NYC</h4>
+        <p>April 10, 2024</p>
+      </div>
+
+      <div class="folder">
+        <img class="cover" src="../images/ATL_SKYL.jpg" alt="Community Outreach" />
+        <h4>Community Outreach - Food Drive</h4>
+        <p>March 22, 2024</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footerContainer1">
+      <img src="../images/logojccnew.png" alt="JCC logo" />
+      <h3>JCC USA NATIONAL COMMITTEE</h3>
+    </div>
+    <div class="socialIcons ease-in">
+      <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+      <a href="#"><i class="fa-brands fa-instagram"></i></a>
+      <a href="#"><i class="fa-brands fa-facebook"></i></a>
+    </div>
+  </footer>
+</body>
+</html>

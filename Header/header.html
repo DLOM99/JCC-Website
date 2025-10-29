@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+                        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            /* Keep margin as requested */ 
+            background-color: #F5F5F0;
+            font-family: 'Arial', sans-serif;
+            color: #3E6148; /* Default text color */
+        }
+        .navbar {
+            /* KEY CHANGE 3: Use position: sticky so the navbar stays with the content */
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            /*padding: 20px 100px;*/
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10; /* Above everything */
+            background-color: #F5F5F0;
+            height:70px;
+            
+        }
+
+
+        .nav-links, .nav-links2 {
+            list-style: none;
+            display: flex;
+            gap: 50px;
+            margin-right: 20px;
+        }
+        .nav-links a, .nav-links2 a {
+            text-decoration: none;
+            color: black;
+            font-size: 1rem;
+            font-family: Arial, Helvetica, sans-serif;
+            cursor: pointer;
+        }
+
+
+        .header-class{
+            height:100%;
+            width: 10%;
+            margin-top:10px;
+        }
+        .header-class img{
+            height:80%;
+            width:100%;
+            object-fit: cover;
+            object-position: center;;
+        }
+        .header{
+            width: 100%;
+            height: 25vh;
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+            
+        }
+        .header > h1 , h4 {
+            margin:0;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class ="navbar">
+            <div class="header-class">
+                <img src="../images/logojccnew 2.png">
+            </div>
+            <ul class ="nav-links">
+                <li><a href ="#"> Home </a></li>
+                <li><a href ="#"> About Us </a></li>
+                <li><a href ="#"> Pre-Sale Merch </a></li>
+                <li><a href ="#"> Countdown  </a></li>
+                <li><a href ="#"> Gallery </a></li>
+                <li><a href ="#"> Contact Us  </a></li>
+            </ul>
+
+        </nav>
+    </header>
+    
+</body>
+</html>

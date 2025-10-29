@@ -1,0 +1,119 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: white;
+  }
+  
+  /* Background Image */
+  .background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('images/ATL_SKYL.jpg') no-repeat center center/cover;
+    overflow: hidden;
+  }
+  
+  /* Green overlay covering the background only */
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 50, 0, 0.6); /* green tint */
+    z-index: 0;
+  }
+  
+  /* Navbar */
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2; /* above overlay */
+  }
+  
+  /* Logo section inside oval */
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+  
+    background-color: #F7F4EA; /* white oval */
+    padding: 5px 15px; /* vertical & horizontal padding */
+    border-radius: 100px; /* oval shape */
+  }
+  
+  .logo-section h1 {
+    color: #556B2F;
+    font-size: 1.2rem;
+    margin: 0;
+  }
+  
+  .logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+  }
+  
+  /* Navbar links */
+  .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+  }
+  
+  .nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s;
+  }
+  
+  .nav-links a:hover {
+    color: #a3ffb3;
+  }
+  
+  /* Center text over background */
+  .center-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .center-text h2 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .center-text p {
+    font-size: 1.2rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .center-text h2 {
+      font-size: 2rem;
+    }
+    .center-text p {
+      font-size: 1rem;
+    }
+    .nav-links {
+      gap: 20px;
+    }
+  }
+  

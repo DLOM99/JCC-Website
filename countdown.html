@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+                * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        /* 1. Make the <html> and <body> fill the entire viewport */
+        html, body {
+            height: 100vh; /* Use 100% or 100vh to fill the screen */
+            width: 100%;
+            /* The body is now the full-screen flex container */
+            display: flex;
+            /* 2. Vertically center the .container */
+            align-items: center; 
+            /* 3. Horizontally center the .container */
+            justify-content: center; 
+        }
+        .count-container{
+            display: flex;
+            gap: 30px;
+            
+        }
+        .time{
+            display:flex;
+            flex-direction:column;
+            align-items: center;
+            justify-content: center;
+            color:#4F8355;;
+        }
+        .time h4 {
+            font-size: 30px;
+            font-weight: 500;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="count-container">
+
+        <div class="time">
+            <h4>74</h4>
+            <p> DAYS</p>
+        </div>
+        <div class="time">
+            <h4>03</h4>
+            <p>HOURS</p>
+        </div>
+        <div class="time">
+            <h4>22</h4>
+            <p>MINUTES</p>
+        </div>
+        <div class="time">
+            <h4>15</h4>
+            <p>SECONDS</p>
+        </div>
+
+    </div>
+</body>
+</html>

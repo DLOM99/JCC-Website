@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product Architecture</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <style>
+    /* GLOBAL RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      background-color: #f5f5f0;
+      color: #3e6148;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    /********** NAVBAR **********/
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f5f5f0;
+      height: 70px;
+      padding: 0 40px;
+      z-index: 10;
+    }
+
+    .header-class img {
+      height: 55px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #3e6148;
+    }
+
+    /********** CONTENT **********/
+    .content {
+      margin: 0 auto;
+      width: 90%;
+      max-width: 1200px;
+      background-color: #f5f5f0;
+      flex: 1;
+      padding-bottom: 40px;
+    }
+
+    /* HEADER GRID */
+    .grid-container {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 20px;
+      width: 100%;
+      height: auto;
+      margin-top: 30px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .items.image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .items.text {
+      background-color: rgba(226, 181, 154, 0.5);
+      padding: 30px;
+    }
+
+    .items.text h2 {
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .items.text p {
+      font-size: 1rem;
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .timeline > div {
+      border-radius: 15px;
+      border: 1px solid #d1d5db;
+      padding: 6px 12px;
+      font-size: 0.85rem;
+      cursor: pointer;
+      background-color: white;
+      transition: background-color 0.2s ease;
+    }
+
+    .timeline > div:hover {
+      background-color: #e9ede9;
+    }
+
+    .green {
+      background-color: #cceabb !important;
+      color: #1b4b36 !important;
+      border: none !important;
+    }
+    .gold {
+      background-color: rgba(226, 181, 154, 0.9) !important;
+      color: #957c62 !important;
+      border: none !important;
+    }
+    .gray {
+      background-color: #c9cdcf !important;
+      color: #44444e !important;
+      border: none !important;
+    }
+
+    /* PRODUCT GRID */
+    .grid-container2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      width: 100%;
+      margin-top: 40px;
+    }
+
+    .wrapper {
+      background-color: white;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+
+    .wrapper:hover {
+      transform: translateY(-5px);
+    }
+
+    .merch {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .wrapper h3 {
+      margin: 10px 0 0 20px;
+      font-size: 1.2rem;
+    }
+
+    .wrapper p {
+      margin: 5px 0 15px 20px;
+      font-size: 0.95rem;
+    }
+
+    .numbers {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 20px 20px 20px;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .Cart {
+      flex: 1;
+      background-color: #4f8355;
+      color: white;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      transition: background-color 0.2s;
+    }
+
+    .Cart:hover {
+      background-color: #3e6148;
+    }
+
+    /* Quantity Control */
+    .quantity-control {
+      display: flex;
+      align-items: center;
+      height: 2rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+
+    .quantity-btn {
+      width: 2rem;
+      height: 100%;
+      font-size: 1.2rem;
+      background-color: #f9fafb;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+
+    .quantity-display {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      background-color: white;
+      border-left: 1px solid #d1d5db;
+      border-right: 1px solid #d1d5db;
+    }
+
+    /* FOOTER NOTES */
+    .footer-Notes {
+      width: 100%;
+      padding: 20px;
+      background-color: white;
+      margin: 30px 0;
+      border-radius: 8px;
+    }
+
+    .footer-Notes h3 {
+      margin-bottom: 10px;
+    }
+
+    .footer-Notes p {
+      font-size: 0.9rem;
+      color: gray;
+      line-height: 1.6;
+    }
+
+    /********** RESPONSIVENESS **********/
+    @media (max-width: 1024px) {
+      .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 10px;
+        height: auto;
+      }
+
+      .nav-links {
+        gap: 20px;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr 1fr;
+        height: auto;
+      }
+
+      .items.text {
+        padding: 20px;
+      }
+
+      .items.text h2 {
+        font-size: 1.8rem;
+      }
+
+      .items.text p {
+        font-size: 0.95rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .grid-container {
+        grid-template-columns: 1fr;
+      }
+
+      .items.image img {
+        height: 250px;
+      }
+
+      .items.text {
+        text-align: center;
+      }
+
+      .nav-links {
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .Cart {
+        flex: none;
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .navbar {
+        flex-direction: column;
+        padding: 10px;
+      }
+
+      .nav-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .items.text h2 {
+        font-size: 1.5rem;
+      }
+
+      .timeline > div {
+        font-size: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function updateQuantity(buttonElement) {
+      const control = buttonElement.closest(".quantity-control");
+      const quantityDisplay = control.querySelector(".quantity-display");
+      const action = buttonElement.getAttribute("data-action");
+      let currentQuantity = parseInt(quantityDisplay.textContent);
+
+      if (action === "decrement") {
+        if (currentQuantity > 1) currentQuantity--;
+      } else if (action === "increment") {
+        currentQuantity++;
+      }
+
+      quantityDisplay.textContent = currentQuantity;
+    }
+  </script>
+
+  <header>
+    <nav class="navbar">
+      <div class="header-class">
+        <img src="../images/logojccnew 2.png" alt="Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../About/About.html">About Us</a></li>
+        <li><a href="../Merch/merch.html">Pre-Sale Merch</a></li>
+        <li><a href="../index.html">Countdown</a></li>
+        <li><a href="../Gallery/Gallery.html">Gallery</a></li>
+        <li><a href="../Contact/contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="content">
+    <div class="grid-container">
+      <div class="items image">
+        <img src="https://placehold.co/600x400/3E6148/ffffff?text=Header+Image+3/5" alt="Header Image" />
+      </div>
+      <div class="items text">
+        <h2>Pre-Sale Merch</h2>
+        <p>
+          Every purchase helps fund ministry logistics, outreach, and youth
+          programs — investing in God's kingdom means sowing into transformed
+          lives and expanded impact.
+        </p>
+        <div class="timeline">
+          <div class="green">Official</div>
+          <div class="gold">Limited run</div>
+          <div class="gray">Secure checkout</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="timeline options">
+      <div class="green">All</div>
+      <div>Apparel</div>
+      <div class="gray">Accessories</div>
+      <div>Fabric</div>
+    </div>
+
+    <div class="grid-container2">
+      <div class="wrapper">
+        <img
+          class="merch"
+          src="https://placehold.co/400x400/E2B59A/3E6148?text=African+Fabric"
+          alt="African Fabric"
+        />
+        <h3>African Fabric</h3>
+        <p>$35</p>
+        <div class="timeline">
+          <div>S</div>
+          <div>M</div>
+          <div>L</div>
+          <div>XL</div>
+        </div>
+        <div class="numbers">
+          <div class="quantity-control">
+            <button class="quantity-btn" data-action="decrement" onclick="updateQuantity(this)">
+              &minus;
+            </button>
+            <span class="quantity-display">1</span>
+            <button class="quantity-btn" data-action="increment" onclick="updateQuantity(this)">
+              +
+            </button>
+          </div>
+          <button class="Cart">Add to cart</button>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <img
+          class="merch"
+          src="https://placehold.co/400x400/3E6148/FFFFFF?text=Green+T-Shirt"
+          alt="T-Shirt"
+        />
+        <h3>Signature T-Shirt</h3>
+        <p>$30</p>
+        <div class="timeline">
+          <div class="green">S</div>
+          <div>M</div>
+          <div>L</div>
+          <div>XL</div>
+        </div>
+        <div class="numbers">
+          <div class="quantity-control">
+            <button class="quantity-btn" data-action="decrement" onclick="updateQuantity(this)">
+              &minus;
+            </button>
+            <span class="quantity-display">1</span>
+            <button class="quantity-btn" data-action="increment" onclick="updateQuantity(this)">
+              +
+            </button>
+          </div>
+          <button class="Cart">Add to cart</button>
+        </div>
+      </div>
+
+      <div class="wrapper">
+        <img
+          class="merch"
+          src="https://placehold.co/400x400/C9CDCF/44444E?text=Grey+Hoodie"
+          alt="Hoodie"
+        />
+        <h3>Cozy Hoodie</h3>
+        <p>$55</p>
+        <div class="timeline">
+          <div>S</div>
+          <div>M</div>
+          <div class="gray">L</div>
+          <div>XL</div>
+        </div>
+        <div class="numbers">
+          <div class="quantity-control">
+            <button class="quantity-btn" data-action="decrement" onclick="updateQuantity(this)">
+              &minus;
+            </button>
+            <span class="quantity-display">1</span>
+            <button class="quantity-btn" data-action="increment" onclick="updateQuantity(this)">
+              +
+            </button>
+          </div>
+          <button class="Cart">Add to cart</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-Notes">
+      <h3>Pickup at the Event Hotel</h3>
+      <p>
+        All pre-sale merchandise will be available for pickup at the event
+        hotel during Christian Café weekend. Please bring your order confirmation
+        and ID. If you're purchasing for someone else, add their name in the
+        order notes.
+      </p>
+    </div>
+  </div>
+</body>
+</html>

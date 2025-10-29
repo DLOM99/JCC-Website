@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html, body {
+    height: 100%;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    color: #3E6148;
+  }
+  
+  /* Background Image */
+  .background {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: url('images/ATL_SKYL.jpg') no-repeat center center/cover;
+    overflow: hidden;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* vertical centering */
+    align-items: center; /* horizontal centering */
+  }
+  
+  /* Green overlay covering the background only */
+  .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8); /* white tint */
+  z-index: 0;
+}
+
+.navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2; /* above overlay */
+    background-color: white;
+  }
+
+  .nav-links,
+  .nav-links2 {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    
+  }
+
+  .nav-links a ,
+  .nav-links2 a {
+    text-decoration: none;
+    color: black;              /* or white depending on your background */
+    font-size: 1.1rem;
+    font-family: 'Times new Roman';
+    font-size:1.25rem;
+    cursor: pointer;
+  }
+  .nav-links li {
+    margin-left: 50px;
+  }
+  .nav-links2 li {
+    margin-right: 200px;
+  }
+  .center-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: black;
+      z-index: 1; /* make sure it’s above the overlay but below navbar */
+      gap: 40px;
+      font-family:'Times new Roman' ,'Playfair Display', Didot, Georgia, serif;
+      margin-bottom: 50px;
+
+    }
+    .center-text h1 {
+        color: #4F8355;
+        font-size: 5.1rem;
+        font-weight:300;
+    }
+    .text1{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap:10px;
+    }
+    .ctp-color{
+        color: #4F8355;
+
+    }
+    .ct-p {
+        font-size : 1.5rem;
+
+    }
+    .ct-p1 {
+        font-size: 1.2rem;
+    }
+    .buttons{
+        display:flex;
+        gap: 50px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .button1, .button2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: gold;
+        color:white;
+        height: 50px;
+        padding: 20px;
+        border-radius: 10px;
+
+    
+
+
+
+    }
+    .button1 {
+        background-color: #4F8355;
+    }
+    .button2 {
+        background-color:	#E2C88D;
+    }
+
+    .footer {
+        height: 200px;
+        width: 100%;
+        background-color: white;
+        
+    }
+
+
+    </style>
+</head>
+<body>
+
+    <div class="background">
+        <div class="overlay"></div>
+
+        <header>
+            
+            <nav class ="navbar">
+                <ul class ="nav-links">
+                    <li><a href ="#"> Home </a></li>
+                    <li><a href ="#"> About Us </a></li>
+                    <li><a href ="#"> Pre-Sale Merch </a></li>
+                    <li><a href ="#"> Countdown  </a></li>
+                    <li><a href ="#"> Gallery </a></li>
+                </ul>
+                <ul class="nav-links2"> 
+                    <li><a href ="#"> Contact Us  </a></li>
+                </ul>
+
+            </nav>
+
+        </header>
+
+        <div class="center-text">
+            <div class="text1">
+                <h1> CHRISTIAN CAFÉ 2025</h1>
+                <p class ="ct-p ctp-color"> "From God's Original Plan to Deliverance from Darkness."</p>
+                <p class = "ct-p1 ctp-color">Isaiah 49:1-26</p>
+            </div>
+           
+            <div class="buttons">
+                <div class="button1">
+                    <p> JOIN US IN ATLANTA</p>
+                </div>
+                <div class="button2">
+                    <p>SHOP PRE-SALE MERCH</p>
+                </div>
+            </div>
+        </div>
+
+       
+
+    </div>
+    
+</body>
+</html>

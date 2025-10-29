@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <title>About Us - JCC</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #f5f5f0;
+      font-family: "Arial", sans-serif;
+      color: #3e6148;
+      overflow-x: hidden;
+    }
+
+    /* Navbar */
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 10;
+      background-color: #f5f5f0;
+      height: 70px;
+      padding: 0 20px;
+    }
+
+    .header-class img {
+      height: 55px;
+      width: auto;
+      object-fit: contain;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 1rem;
+      font-family: Arial, Helvetica, sans-serif;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: #3e6148;
+    }
+
+    /* Header Section */
+    .header {
+      width: 100%;
+      height: 35vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(
+        180deg,
+        rgba(93, 134, 108, 1) 9%,
+        rgba(245, 245, 240, 1) 25%,
+        rgba(194, 166, 140, 1) 100%
+      );
+      text-align: center;
+      padding: 20px;
+    }
+
+    .header h1 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 3rem;
+    }
+
+    .header h4 {
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 300;
+      margin-top: 10px;
+      font-size: 1rem;
+    }
+
+    /* Sections */
+    .section {
+      width: 100%;
+      padding: 50px 0;
+    }
+
+    .s1 {
+      background-color: #fffdf0;
+    }
+
+    .s2 {
+      background-color: #eff3ea;
+    }
+
+    .s3 {
+      background-color: #fffdf0;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      width: 80%;
+      max-width: 1200px;
+      margin: 0 auto;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .items.image {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .items.image img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+
+    .items.text {
+      padding: 20px;
+    }
+
+    .items.text h3 {
+      font-size: 1.8rem;
+      font-family: "Times New Roman", Times, serif;
+      color: #3e6148;
+      margin-bottom: 10px;
+    }
+
+    .items.text p {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 0.95rem;
+      color: #44444e;
+      margin-bottom: 15px;
+      line-height: 1.5;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #4f8355;
+      padding: 20px 0;
+      color: white;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .footerContainer1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+      flex-wrap: wrap;
+    }
+
+    .footerContainer1 img {
+      width: 45px;
+      height: 45px;
+      background-color: white;
+      border-radius: 5px;
+      object-fit: contain;
+    }
+
+    .footerContainer1 h3 {
+      font-size: 1rem;
+      font-weight: 400;
+      margin: 0;
+    }
+
+    .socialIcons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .socialIcons a {
+      text-decoration: none;
+      padding: 6px;
+      border-radius: 50%;
+    }
+
+    .socialIcons a i {
+      font-size: 1.3em;
+      color: white;
+      transition: color 0.3s ease;
+    }
+
+    .socialIcons a i:hover {
+      color: #e2c88d;
+    }
+
+    /********** Responsive Design **********/
+    @media (max-width: 1024px) {
+      .nav-links {
+        gap: 20px;
+      }
+
+      .grid-container {
+        width: 90%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        height: auto;
+        padding: 10px;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+
+      .header h1 {
+        font-size: 2.3rem;
+      }
+
+      .header h4 {
+        font-size: 0.9rem;
+      }
+
+      .grid-container {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .items.text {
+        padding: 10px;
+      }
+
+      .items.image img {
+        max-height: 300px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header h1 {
+        font-size: 1.8rem;
+      }
+
+      .header h4 {
+        font-size: 0.8rem;
+      }
+
+      .items.text h3 {
+        font-size: 1.4rem;
+      }
+
+      .items.text p {
+        font-size: 0.85rem;
+      }
+
+      footer {
+        font-size: 0.8rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="header-class">
+        <img src="../images/logojccnew 2.png" alt="JCC Logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../About/About.html">About Us</a></li>
+        <li><a href="../Merch/merch.html">Pre-Sale Merch</a></li>
+        <li><a href="../index.html">Countdown</a></li>
+        <li><a href="../Gallery/Gallery.html">Gallery</a></li>
+        <li><a href="../Contact/contact.html">Contact Us</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="header">
+    <h1>About Us</h1>
+    <h4>Moments from Christian Café — testimonies, worship, and service</h4>
+  </div>
+
+  <!-- Section 1 -->
+  <section class="section s1">
+    <div class="grid-container">
+      <div class="items image">
+        <img
+          src="../images/business-hands-joined-together-teamwork.jpg"
+          alt="Teamwork"
+        />
+      </div>
+      <div class="items text">
+        <h3>Who Started This Mission</h3>
+        <p>
+          The Christian Café movement started through the passion and vision of
+          dedicated believers who desired to create a space for spiritual
+          connection, worship, and community.
+        </p>
+        <p>
+          This initiative was built on faith, love, and service, uniting
+          believers across branches and generations under one purpose — to
+          glorify God and uplift others through fellowship and worship.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2 -->
+  <section class="section s2">
+    <div class="grid-container">
+      <div class="items text">
+        <h3>What Our Church Is About</h3>
+        <p>
+          Our church believes in the power of transformation through the Word of
+          God and the fellowship of believers.
+        </p>
+        <p>
+          From worship gatherings to outreach programs, every ministry at
+          Christian Café is driven by a desire to serve and impact lives
+          spiritually, emotionally, and socially.
+        </p>
+      </div>
+      <div class="items image">
+        <img
+          src="../images/empty-christian-church-building.jpg"
+          alt="Church building"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3 -->
+  <section class="section s3">
+    <div class="grid-container">
+      <div class="items image">
+        <img
+          src="../images/group-people-sitting-by-sea-enjoying-beautiful-view-sunset.jpg"
+          alt="Community"
+        />
+      </div>
+      <div class="items text">
+        <h3>Where We Are Now</h3>
+        <p>
+          Today, Christian Café USA stands as a united network of believers
+          across cities, carrying out the same passion that sparked its
+          beginning.
+        </p>
+        <p>
+          We remain steadfast in faith and vision — building bridges across
+          generations, empowering youth, and expanding God’s kingdom through
+          service and love.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footerContainer1">
+      <img src="../images/logojccnew.png" alt="JCC logo" />
+      <h3>JCC USA NATIONAL COMMITTEE</h3>
+    </div>
+    <div class="footerContainer">
+      <div class="socialIcons ease-in">
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

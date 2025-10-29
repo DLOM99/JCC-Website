@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        /* 1. Make the <html> and <body> fill the entire viewport */
+        html, body {
+            height: 100vh; /* Use 100% or 100vh to fill the screen */
+            width: 100%;
+            /* The body is now the full-screen flex container */
+            display: flex;
+            /* 2. Vertically center the .container */
+            align-items: center; 
+            /* 3. Horizontally center the .container */
+            justify-content: center; 
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            /* Remove width: 100% here to allow it to be truly centered, 
+               or keep it if you want it to span the full width AND be centered 
+               (but centered doesn't make sense if it's 100% wide) 
+               I'll keep it for structure, but center is achieved by the body. */
+            width: 80%; /* Setting a specific width helps visualize centering */
+            max-width: 1200px;
+            padding: 20px;
+        }
+        .text-content {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .text-content h2 {
+            font-size: 3rem;
+            font-weight: 300;
+            color: #4F8355;
+
+        }
+        .merch-Content {
+            display: flex;
+            /* Centers the merch units within the merch-Content div */
+            justify-content: center; 
+            gap: 30px; /* Increased gap for better spacing */
+            padding: 10px;
+        }
+        .unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            background-color: #FAF8F1;
+            padding: 15px;
+            flex: 1; /* Allows units to take up equal space */
+            width: 100px;
+            max-width: 200px;
+            height: 300px;
+        }
+        .unit img {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+            background-color: #f0f0f0; /* Placeholder color for the image area */
+            min-height: 150px;
+        }
+
+        .unit h3{
+            margin-top: 10px;
+            font-weight: 200;
+        }
+        .order {
+            background-color: #E2C88D;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 45px;
+            cursor: pointer;
+            width: 80%;
+            border-radius: 10px;
+            font-family: Arial;
+        }
+    </style>
+    <title>Document</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="text-content">
+            <h2>PRE-ORDER YOUR MERCH HERE</h3>
+        </div>
+        <div class="merch-Content">
+            <div class="unit">
+                <img src="" alt="White shirt">
+                <h3> White T-Shirt</h3>
+                <div class ="order">
+                    <p>Order Here</p>
+                </div>
+            </div>
+            <div class="unit">
+                <img src="" alt="Green T shirt ">
+                <h3> Green T-Shirt</h3>
+                <div class ="order">
+                    <p>Order Here</p>
+                </div>
+            </div>
+            <div class="unit">
+                <img src="" alt="Tote bag">
+                <h3> Tote bag</h3>
+                <div class ="order">
+                    <p>Order Here</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
