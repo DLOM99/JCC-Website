@@ -5,6 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    
     <title>Product Architecture</title>
     <style>
         /* GLOBAL RESET & BASE STYLES */
@@ -15,69 +18,223 @@
         }
         
         body {
-            /* Keep margin as requested */
-
             display: flex;
             flex-direction: column;
-            background-color:#F5F5F0;
+            background-color: white;
             color: #3E6148;
             font-family: Arial, Helvetica, sans-serif;
-            
-            background-color: #F5F5F0;
-            font-family: 'Arial', sans-serif;
-            color: #3E6148; /* Default text color */
         }
   
+        /* ======================================================= */
+        /* NEW NAVBAR STYLES (From Source Code) */
+        /* ======================================================= */
         .navbar {
-            /* KEY CHANGE 3: Use position: sticky so the navbar stays with the content */
             position: sticky;
             top: 0;
             left: 0;
             width: 100%;
-            /*padding: 20px 100px;*/
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start; 
+            align-items: center; 
+            z-index: 1000;
+            background-color: white; /* Changed from #F5F5F0 for contrast */
+            height: 70px;
+            padding: 0 30px; 
+           /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Added subtle shadow for depth */
+        }
+
+        /* Container to push the links to the center */
+        .nav-center-container {
+            flex-grow: 1; 
+            display: flex;      
+            justify-content: center; 
             align-items: center;
-            z-index: 10; /* Above everything */
-            background-color: #F5F5F0;
-            
         }
 
         .nav-links, .nav-links2 {
             list-style: none;
-            display: flex;
+            display: flex; 
             gap: 50px;
         }
         .nav-links a, .nav-links2 a {
             text-decoration: none;
             color: black;
             font-size: 1rem;
-            font-family: 'Times new Roman';
+            font-family: Poppins, Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            padding: 5px 0 ;
+        }
+
+        /* Underline Bar Styles */
+        .nav-links a::after{
+            content: '';
+            position:absolute;
+            height: 3px;
+            background-color: black;
+            left:0;
+            bottom:0;
+            width: 100%;
+            width:0;
+            opacity:0;
+            transition: width 0.3s ease-in, opacity 0.3s ease-in;
+        }
+        .nav-links a.active::after{
+            width: 100%;
+            opacity:1;
+        }
+
+        .nav-links a:hover::after{
+            width:100%;
+            opacity:1;
+        }
+
+        /* Logo and Header Text */
+        .header-class {
+            height: 100%; 
+            width: 350px; 
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0; 
+            padding-right: 5px; 
+        }
+        
+        .header-class img {
+            height: 100%; 
+            width: 70px; 
+            max-width: none; 
+            object-fit: contain; 
+            object-position: left; 
+            margin-right: 10px; 
+            cursor: pointer;
+        }
+        
+        .header-class p {
+            margin: 0; 
+            line-height: 1.2; 
+            font-weight: 500; 
+            font-size: 1.5rem; 
+            color: #3E6148;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif,Poppins;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+        
+        /* Hamburger Icon Container */
+        .hamburger-div{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 50px; 
+            background-color: inherit; 
+            height:50px;
+            justify-content: center;
+            margin-left: 200px;
+            margin-right: 10px;
             cursor: pointer;
         }
 
-        .header-class{
-            height:100%;
-            width: 10%;
-        }
-        .header-class img{
-            height:100%;
-            width:100%;
-            object-fit: cover;
-            object-position: center;;
+        /* Hamburger Lines */
+        .line{
+            width: 100%;
+            height: 5px;
+            background-color: black;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;          
         }
         
-        /* --- GRID CONTAINER 1 (HEADER LAYOUT) --- */
+        /* X-CROSS ANIMATION (Relies on the HTML structure: side-menu sibling of header) */
+
+        /* Line 1: Moves down and rotates clockwise */
+        .side-menu.open ~ header .hamburger-div .line1 { 
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        /* Line 2: Hides */
+        .side-menu.open ~ header .hamburger-div .line2 {
+            opacity: 0;
+        }
+
+        /* Line 3: Moves up and rotates counter-clockwise */
+        .side-menu.open ~ header .hamburger-div .line3 {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+
+        /* SLIDING SIDE MENU STYLES */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            height: 100vh; 
+            width: 300px; 
+            background-color: #fcfcfc; 
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+            z-index: 998; 
+            right: -300px; 
+            transition: right 0.4s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* SLIDING IN: OVERRIDE THE right PROPERTY */
+        .side-menu.open {
+            right: 0; 
+        }
+
+        /* STYLING THE VERTICAL MENU CONTENTS */
+        .menu-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-header img {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .menu-header p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #3E6148;
+        }
+
+        .menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+            padding: 0;
+        }
+
+        .menu-links a {
+            text-decoration: none;
+            color: #3E6148;
+            font-family: Poppins, Arial, Helvetica, sans-serif;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* ======================================================= */
+        /* ORIGINAL CONTENT STYLES (Remaining) */
+        /* ======================================================= */
         .grid-container {
             display: grid; 
             grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-            grid-template-rows: 1fr; /* Use 1fr since there's only one row */
+            grid-template-rows: 1fr; 
             width: 100%;
             height: 400px;
             border-radius: 10px;
             overflow: hidden;
             margin-top: 20px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
         }
         .items { 
             display: flex;
@@ -86,16 +243,14 @@
             align-items: flex-start;
         }
         .image {
-            background-color: #3E6148; /* Dark color for image placeholder */
+            background-color: #3E6148; 
             grid-column: span 3;
-            /* Placeholder for image styling */
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 1.5rem;
         }
         .text {
-            /* Transparent peachy color with dark text for contrast */
             background-color: rgba(226, 181, 154, 0.5); 
             grid-column: span 2;
             padding: 20px 30px;
@@ -109,30 +264,23 @@
             line-height: 1.5;
             margin-bottom: 20px;
         }
-        .text .timeline { /* Style for the timeline inside the header text */
-             /* Remove left margin from the inherited timeline styles */
+        .text .timeline { 
             margin-left: 0; 
         }
-
-        /* --- GRID CONTAINER 2 (CARD GRID) --- */
         .grid-container2 {
             display: grid; 
             grid-template-columns: 1fr 1fr 1fr;
-            /*grid-template-rows: 1fr 1fr 1fr; */
-            grid-auto-rows: 400px; /* Increased height for content within the wrapper */
+            grid-auto-rows: 400px; 
             width: 100%;
-            
             margin-top: 40px;
             gap: 20px;
         }
         .card {
-            background-color: transparent; /* Wrapper handles background */
+            background-color: transparent; 
             border-radius: 10px;
             overflow: hidden;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
         }
-
-        /* --- PRODUCT CARD STYLING (Used inside the .card > .wrapper) --- */
         .wrapper {
             width: 100%; 
             height: 100%;
@@ -142,10 +290,9 @@
             overflow: hidden;
             font-weight: 200;
         }
-
         .merch {
             width : 100%;
-            height: 60%; /* Adjusted height */
+            height: 75%; 
             object-fit: cover;
             object-position: center;
             display: block;
@@ -157,8 +304,14 @@
             margin: 5px 0 15px 20px;
             font-size: 1rem;
         }
-
-        /* Timeline (Size Selector) */
+        .wrapper_2{
+            display:flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap:10px;
+            margin: 10px 0;
+        }
         .timeline {
             display: flex;
             gap: 10px;
@@ -176,7 +329,6 @@
         .timeline > div:hover {
             background-color: #f0f0f0;
         }
-        /* Color Modifiers for timeline divs */
         .green {
             background-color: #CCEABB !important;
             color: #1B4B36 !important;
@@ -192,21 +344,14 @@
             color:#44444E !important;
             border: none !important;
         }
-
-        /* Quantity and Cart styles */
         .numbers {
             display: flex;
             margin: 10px 20px 20px 20px;
             gap: 15px;
             align-items: center;
-           
-            /* Added background for visibility */
-            /*background-color: rgba(62, 97, 72, 0.1); */
-            border-radius: 8px;
-
-
         }
-        .numbers .Cart {
+        .Cart {
+            width: 70%;
             flex: 1; 
             background-color: #4F8355;
             color: white;
@@ -219,51 +364,11 @@
             transition: background-color 0.2s;
             margin-bottom: 10px;
         }
-        .numbers .Cart:hover {
+        .Cart:hover {
             background-color: #3E6148;
         }
-
-        /* Quantity Control */
-        .quantity-control {
-            display: flex;
-            align-items: center;
-            height: 2rem; 
-            border: 1px solid #d1d5db; 
-            border-radius: 0.5rem; 
-            overflow: hidden; 
-            margin-bottom: 10px;
-            /*box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05); */
-        }
-        .quantity-btn {
-            width: 2rem;
-            height: 100%;
-            font-size: 1.2rem;
-            background-color: #f9fafb;
-            cursor: pointer;
-            border: none;
-            outline: none;
-        }
-        .quantity-btn:hover { background-color: #f3f4f6; }
-        .quantity-btn[data-action="decrement"] { color: #4b5563; }
-        .quantity-btn[data-action="increment"] { color: #2563eb; }
-
-        .quantity-display {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 2.5rem;
-            height: 100%;
-            font-size: 1rem;
-            font-weight: 600;
-            color: #1f2937;
-            background-color: white;
-            border-left: 1px solid #d1d5db;
-            border-right: 1px solid #d1d5db;
-        }
         .options {
-
             margin : 20px 0;
-
         }
         .footer-Notes{
             width: 100%;
@@ -283,64 +388,13 @@
         }
         .content{
             margin: 0 200px;
-            background-color: #F5F5F0;
+            background-color: white;
             
             flex: 1;
         }
-                /********* header **********/
-                .navbar {
-            /* KEY CHANGE 3: Use position: sticky so the navbar stays with the content */
-            position: sticky;
-            top: 0;
-            left: 0;
-            width: 100%;
-            /*padding: 20px 100px;*/
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 10; /* Above everything */
-            background-color: #F5F5F0;
-            height:70px;
-            font-family: Arial, Helvetica, sans-serif;
-        
-            
-        }
-
-
-        .nav-links, .nav-links2 {
-            list-style: none;
-            display: flex;
-            gap: 50px;
-            margin-right: 20px;
-        }
-        .nav-links a, .nav-links2 a {
-            text-decoration: none;
-            color: black;
-            font-size: 1rem;
-            font-family: Arial, Helvetica, sans-serif;
-            cursor: pointer;
-        }
-
-        .header-class{
-            height:100%;
-            width: 10%;
-            margin-top:10px;
-        }
-        .header-class img{
-            height:80%;
-            width:100%;
-            object-fit: cover;
-            object-position: center;;
-        }
-
-
-
-        /***** Footer *******/ 
-
     </style>
 </head>
 <body>
-    <!-- JavaScript for Quantity Selector -->
     <script>
         function updateQuantity(buttonElement) {
             const control = buttonElement.closest('.quantity-control');
@@ -359,133 +413,119 @@
             quantityDisplay.textContent = currentQuantity;
         }
     </script>
+    
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <img src="../../images/urora.png.PNG" alt="Logo">
+            <p>Jcc Usa</p>
+        </div>
+        <ul class="menu-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+    
     <header>
         <nav class ="navbar">
             <div class="header-class">
-                <img src="../images/logojccnew 2.png">
+                <img src="../images/logojccnew 2.png" alt="Logo"> <p>Jcc Usa  </p> </div>
+            
+            <div class="nav-center-container">
+                <ul class ="nav-links">
+                    <li><a href ="#" class ="active"> About Us </a></li>
+                    <li><a href ="#"> Events </a></li>
+                    <li><a href ="#"> Gallery </a></li>
+                    <li><a href ="#"> Contact Us  </a></li>
+                </ul>
             </div>
-            <ul class ="nav-links">
-                <li><a href ="#"> Home </a></li>
-                <li><a href ="#"> About Us </a></li>
-                <li><a href ="#"> Pre-Sale Merch </a></li>
-                <li><a href ="#"> Countdown  </a></li>
-                <li><a href ="#"> Gallery </a></li>
-                <li><a href ="#"> Contact Us  </a></li>
-            </ul>
+            
+            <div  class ="hamburger-div" id="hamburger">
+                <div class = " line line1"></div>
+                <div class = " line line2"></div>
+                <div class = " line line3"></div>
+            </div> 
 
         </nav>
     </header>
+    
     <div class="content">
-    <!-- GRID CONTAINER 1: HEADER/IMAGE LAYOUT -->
-    <div class="grid-container">
-        <!-- Image placeholder area (3/5 width) -->
-        <div class="items image">
-            <img src="https://placehold.co/600x400/3E6148/ffffff?text=Header+Image+3/5" alt="Merch display" style="width: 100%; height: 100%; object-fit: cover;">
-        </div>
-        <!-- Text/Info area (2/5 width) -->
-        <div class="items text">
-            <h2>Pre-Sale Merch</h2>
-            <p>Every purchase helps fund ministry logistics, outreach, and youth programs investing in God's kingdom means sowing into transformed lives and expanded impact.</p>
-            <div class="timeline">
-                <div class="green">Official</div>
-                <div class="gold">Limited run</div>
-                <div class="gray">Secure checkout</div>
+        <div class="grid-container">
+            <div class="items image">
+                <img src="https://placehold.co/600x400/3E6148/ffffff?text=Header+Image+3/5" alt="Merch display" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
-        </div>
-    </div>
-
-    <div class="timeline options">
-        <div class = "green">All</div>
-        <div>Apperel</div>
-        <div class="gray">Accesories</div>
-        <div>Fabric</div>
-    </div>
-
-    <!-- GRID CONTAINER 2: PRODUCT CARDS -->
-    <div class="grid-container2">
-        <div class="card">
-            <!-- Product Card 1 -->
-            <div class="wrapper">
-                <img class="merch" src="https://placehold.co/400x400/E2B59A/3E6148?text=African+Fabric" alt="merch">
-                <h3>African Fabric</h3>
-                <p>$35</p>
+            <div class="items text">
+                <h2>Pre-Sale Merch</h2>
+                <p>Every purchase helps fund ministry logistics, outreach, and youth programs investing in God's kingdom means sowing into transformed lives and expanded impact.</p>
                 <div class="timeline">
-                    <div>S</div>
-                    <div>M</div>
-                    <div>L</div>
-                    <div>XL</div>
-                </div>
-                <div class="numbers">
-                    <div class="quantity-control">
-                        <button class="quantity-btn" data-action="decrement" onclick="updateQuantity(this)">&minus;</button>
-                        <span class="quantity-display">1</span>
-                        <button class="quantity-btn" data-action="increment" onclick="updateQuantity(this)">+</button>
-                    </div>
-                    <button class="Cart">Add to cart</button>
+                    <div class="green">Official</div>
+                    <div class="gold">Limited run</div>
+                    <div class="gray">Secure checkout</div>
                 </div>
             </div>
         </div>
-        <div class="card">
-            <!-- Product Card 2 -->
-            <div class="wrapper">
-                <img class="merch" src="https://placehold.co/400x400/3E6148/FFFFFF?text=Green+T-Shirt" alt="merch">
-                <h3>Signature T-Shirt</h3>
-                <p>$30</p>
-                <div class="timeline">
-                    <div class="green">S</div>
-                    <div>M</div>
-                    <div>L</div>
-                    <div>XL</div>
-                </div>
-                <div class="numbers">
-                    <div class="quantity-control">
-                        <button class="quantity-btn" data-action="decrement" onclick="updateQuantity(this)">&minus;</button>
-                        <span class="quantity-display">1</span>
-                        <button class="quantity-btn" data-action="increment" onclick="updateQuantity(this)">+</button>
+
+        <div class="timeline options">
+            <div class = "green">All</div>
+            <div>Apperel</div>
+            <div class="gray">Accesories</div>
+            <div>Fabric</div>
+        </div>
+
+        <div class="grid-container2">
+            <div class="card">
+                <div class="wrapper">
+                    <img class="merch" src="https://placehold.co/400x400/E2B59A/3E6148?text=African+Fabric" alt="merch">
+                    <div class="wrapper_2">
+                        <h3>Cozy Hoodie</h3>
+                        <button class="Cart">Book</button>
                     </div>
-                    <button class="Cart">Add to cart</button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="wrapper">
+                    <img class="merch" src="https://placehold.co/400x400/3E6148/FFFFFF?text=Green+T-Shirt" alt="merch">
+                    <div class="wrapper_2">
+                        <h3>Signature T-shirt</h3>
+                        <button class="Cart">Book</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="wrapper">
+                    <img class="merch" src="https://placehold.co/400x400/C9CDCF/44444E?text=Grey+Hoodie" alt="merch">
+                    <div class="wrapper_2">
+                        <h3>Cozy Hoodie</h3>
+                        <button class="Cart">Book</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
-        <div class="card">
-            <!-- Product Card 3 -->
-            <div class="wrapper">
-                <img class="merch" src="https://placehold.co/400x400/C9CDCF/44444E?text=Grey+Hoodie" alt="merch">
-                <h3>Cozy Hoodie</h3>
-                <p>$55</p>
-                <div class="timeline">
-                    <div>S</div>
-                    <div>M</div>
-                    <div class="gray">L</div>
-                    <div>XL</div>
-                </div>
-                <div class="numbers">
-                    <div class="quantity-control">
-                        <button class="quantity-btn" data-action="decrement" onclick="updateQuantity(this)">&minus;</button>
-                        <span class="quantity-display">1</span>
-                        <button class="quantity-btn" data-action="increment" onclick="updateQuantity(this)">+</button>
-                    </div>
-                    <button class="Cart">Add to cart</button>
-                </div>
-            </div>
+
+        <div class="footer-Notes">
+            <h3>Pickup at the Event Hotel</h3>
+            <p>All pre-sale merchandise will be available for pickup at the event hotel during Christian Café weekend. Please bring 
+                your order confirmation and ID. if you're purchasing for someone else, add their name in the order notes.
+            </p>
         </div>
-        <div class="card"></div>
-        <div class="card"></div>
-        <div class="card"></div>
-    </div>
-
-    <div class="footer-Notes">
-        <h3>Pickup at the Event Hotel</h3>
-        <p>All pre-sale merchandise will be available for pickup at the event hotel during Christian Café weekend. Please bring 
-            your order confirmation and ID. if you're purchasing for someone else, add their name in the order notes.
-        </p>
-    </div>
 
     </div>
 
+    <script>
+        // Wait for the DOM to fully load before trying to find the elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.getElementById('hamburger');
+            const sideMenu = document.getElementById('sideMenu'); 
 
-
-
+            if (hamburger && sideMenu) {
+                hamburger.onclick = function() {
+                    // Toggles the 'open' class on the side menu element
+                    sideMenu.classList.toggle('open');
+                };
+            }
+        });
+    </script>
 </body>
-
 </html>

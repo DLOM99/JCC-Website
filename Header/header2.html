@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <title>Navigation Bar Layout</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: white;
+            font-family: 'Arial', sans-serif;
+            color: #3E6148;
+        }
+        
+        .navbar {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start; 
+            align-items: center; 
+            /* Z-INDEX FIX: Must be higher than the menu (998) to ensure clickability */
+            z-index: 1000;
+            background-color: white;
+            height: 70px;
+            padding: 0 30px; 
+        }
+
+        /* Container to push the links to the center */
+        .nav-center-container {
+            flex-grow: 1; 
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+        }
+
+        .nav-links, .nav-links2 {
+            list-style: none;
+            display: flex; 
+            gap: 50px;
+        }
+        .nav-links a, .nav-links2 a {
+            text-decoration: none;
+            color: black;
+            font-size: 1rem;
+            font-family: Poppins, Arial, Helvetica, sans-serif;
+            cursor: pointer;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            padding: 5px 0 ;
+        }
+
+        /* Underline Bar Styles */
+        .nav-links a::after{
+            content: '';
+            position:absolute;
+            height: 3px;
+            background-color: black;
+            left:0;
+            bottom:0;
+            width: 100%;
+            width:0;
+            opacity:0;
+            transition: width 0.3s ease-in, opacity 0.3s ease-in;
+        }
+        .nav-links a.active::after{
+            width: 100%;
+            opacity:1;
+        }
+
+        .nav-links a:hover::after{
+            width:100%;
+            opacity:1;
+        }
+
+        /* Logo and Header Text */
+        .header-class {
+            height: 100%; 
+            width: 350px; 
+            display: flex; 
+            align-items: center; 
+            flex-shrink: 0; 
+            padding-right: 5px; 
+        }
+        
+        .header-class img {
+            height: 100%; 
+            width: 70px; 
+            max-width: none; 
+            object-fit: contain; 
+            object-position: left; 
+            margin-right: 10px; 
+            cursor: pointer;
+        }
+        
+        .header-class p {
+            margin: 0; 
+            line-height: 1.2; 
+            font-weight: 500; 
+            font-size: 1.5rem; 
+            color: #3E6148;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif,Poppins;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+        }
+
+        .header {
+            width: 100%;
+            height: 25vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: green;
+        }
+        
+        .header > h1 , h4 {
+            margin: 0;
+        }
+        
+        /* Hamburger Icon Container */
+        .hamburger-div{
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 50px; 
+            background-color: inherit; 
+            height:50px;
+            justify-content: center;
+            /* Pushes hamburger to the far right */
+            margin-left: 200px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        /* Hamburger Lines */
+        .line{
+            width: 100%;
+            height: 5px;
+            background-color: black;
+            /* Smooth transition for the X-cross transformation */
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;          
+        }
+        
+        /* X-CROSS ANIMATION (Triggered by the .open class on the sibling .side-menu) */
+
+        /* Line 1: Moves down and rotates clockwise */
+        .side-menu.open ~ header .hamburger-div .line1 { 
+            transform: translateY(10px) rotate(45deg);
+        }
+
+        /* Line 2: Hides */
+        .side-menu.open ~ header .hamburger-div .line2 {
+            opacity: 0;
+        }
+
+        /* Line 3: Moves up and rotates counter-clockwise */
+        .side-menu.open ~ header .hamburger-div .line3 {
+            transform: translateY(-10px) rotate(-45deg);
+        }
+
+        /* ======================================================= */
+        /* SLIDING SIDE MENU STYLES */
+        /* ======================================================= */
+        .side-menu {
+            position: fixed;
+            top: 0;
+            height: 100vh; 
+            width: 300px; 
+            background-color: #fcfcfc; 
+            box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+            /* Z-INDEX FIX: Lower than the navbar (1000) */
+            z-index: 998; 
+            
+            /* HIDING OFF-SCREEN */
+            right: -300px; 
+            
+            /* SLIDE ANIMATION */
+            transition: right 0.4s ease-in-out;
+            
+            /* LAYOUT & PADDING */
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        /* SLIDING IN: OVERRIDE THE right PROPERTY */
+        .side-menu.open {
+            right: 0; /* Brings the panel into view */
+        }
+
+        /* STYLING THE VERTICAL MENU CONTENTS */
+        .menu-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu-header img {
+            height: 40px;
+            width: 40px;
+            margin-right: 10px;
+        }
+
+        .menu-header p {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #3E6148;
+        }
+
+        .menu-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column; /* Stacks links vertically */
+            gap: 15px;
+            padding: 0;
+        }
+
+        .menu-links a {
+            text-decoration: none;
+            color: #3E6148;
+            font-family: Poppins, Arial, Helvetica, sans-serif;
+            font-size: 1.2rem;
+            padding: 10px 0;
+            display: block;
+            border-bottom: 1px solid #eee;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <div class="side-menu" id="sideMenu">
+        <div class="menu-header">
+            <img src="../../images/urora.png.PNG" alt="Logo">
+            <p>Jcc Usa</p>
+        </div>
+        <ul class="menu-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Events</a></li>
+            <li><a href="#">Gallery</a></li>
+            <li><a href="#">Contact Us</a></li>
+        </ul>
+    </div>
+    
+<header>
+    <nav class ="navbar">
+        <div class="header-class">
+            <img src="../../images/urora.png.PNG" alt="Logo">
+            <p>Jcc Usa  </p>
+        </div>
+        
+        <div class="nav-center-container">
+            <ul class ="nav-links">
+                <li><a href ="#" class ="active"> About Us </a></li>
+                <li><a href ="#"> Events </a></li>
+                <li><a href ="#"> Gallery </a></li>
+                <li><a href ="#"> Contact Us  </a></li>
+            </ul>
+        </div>
+        
+        <div  class ="hamburger-div" id="hamburger">
+            <div class = " line line1"></div>
+            <div class = " line line2"></div>
+            <div class = " line line3"></div>
+        </div> 
+
+    </nav>
+</header>
+
+
+
+<script>
+    // Wait for the DOM to fully load before trying to find the elements
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu = document.getElementById('sideMenu'); 
+
+        if (hamburger && sideMenu) {
+            hamburger.onclick = function() {
+                // Toggles the 'open' class on the side menu element
+                sideMenu.classList.toggle('open');
+            };
+        }
+    });
+</script>
+    
+</body>
+</html>

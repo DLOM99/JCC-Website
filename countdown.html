@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Event Countdown</title>
     <style>
                 * {
             margin: 0;
@@ -22,23 +22,33 @@
             align-items: center; 
             /* 3. Horizontally center the .container */
             justify-content: center; 
+            font-family: sans-serif;
+            background-color: #f4f4f4;
         }
         .count-container{
             display: flex;
             gap: 30px;
-            
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .time{
             display:flex;
             flex-direction:column;
             align-items: center;
             justify-content: center;
-            color:#4F8355;;
+            color:#4F8355; /* Changed color to better match the code style */
         }
         .time h4 {
-            font-size: 30px;
-            font-weight: 500;
+            font-size: 48px; /* Increased size for better visibility */
+            font-weight: 700;
+            margin-bottom: 5px;
             
+        }
+        .time p {
+            font-size: 14px;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -46,22 +56,60 @@
     <div class="count-container">
 
         <div class="time">
-            <h4>74</h4>
-            <p> DAYS</p>
+            <h4 id="days">00</h4>
+            <p>DAYS</p>
         </div>
         <div class="time">
-            <h4>03</h4>
+            <h4 id="hours">00</h4>
             <p>HOURS</p>
         </div>
         <div class="time">
-            <h4>22</h4>
+            <h4 id="minutes">00</h4>
             <p>MINUTES</p>
         </div>
         <div class="time">
-            <h4>15</h4>
+            <h4 id="seconds">00</h4>
             <p>SECONDS</p>
         </div>
 
     </div>
+
+    <script>
+        // Set the date and time the event starts: December 21, 2025, 4:00 PM
+        const targetDate = new Date("Dec 21, 2025 16:00:00").getTime();
+
+        // Update the countdown every 1 second
+        const countdown = setInterval(function() {
+
+            // Get current date and time
+            const now = new Date().getTime();
+            
+            // Find the distance between now and the target date
+            const distance = targetDate - now;
+
+            // Time calculations for days, hours, minutes, and seconds
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Output the result in the corresponding elements, adding a leading zero if < 10
+            document.getElementById("days").innerHTML = String(days).padStart(2, '0');
+            document.getElementById("hours").innerHTML = String(hours).padStart(2, '0');
+            document.getElementById("minutes").innerHTML = String(minutes).padStart(2, '0');
+            document.getElementById("seconds").innerHTML = String(seconds).padStart(2, '0');
+
+            // If the countdown is finished, write some text
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+                // Optionally, change the text to indicate the event has started
+                document.querySelector('.count-container').innerHTML = '<h2>🎉 THE EVENT HAS STARTED! 🎉</h2>';
+            }
+        }, 1000); // 1000ms = 1 second
+    </script>
 </body>
 </html>

@@ -12,63 +12,241 @@
     referrerpolicy="no-referrer"
   />
   <title>Gallery - Christian Café</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
+    /* Global/Base Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
     html, body {
       height: 100%;
       margin: 0;
+      overflow-x: hidden; 
     }
     body {
       display: flex;
       flex-direction: column;
-      background-color: #F5F5F0;
+      background-color: #FFFFFF;
       color: #3E6148;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Lora', serif;
     }
 
-    /********** NAVBAR **********/
+    /* Custom Typography */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    /* ==================================== */
+    /* NEW NAVBAR STYLES (Replacing old simple navbar) */
+    /* ==================================== */
     .navbar {
-      position: sticky;
-      top: 0;
-      left: 0;
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #F5F5F0;
-      height: 70px;
-      padding: 0 30px;
-      z-index: 10;
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; 
+        align-items: center; 
+        z-index: 1000;
+        background-color: white;
+        height: 70px;
+        padding: 0 30px; 
     }
 
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 40px;
+    /* Container to push the links to the center */
+    .nav-center-container {
+        flex-grow: 1; 
+        display: flex;
+        justify-content: center; 
+        align-items: center;
     }
 
-    .nav-links a {
-      text-decoration: none;
-      color: black;
-      font-size: 1rem;
-      font-family: Arial, Helvetica, sans-serif;
-      cursor: pointer;
-      transition: color 0.3s ease;
+    .nav-links, .nav-links2 {
+        list-style: none;
+        display: flex; 
+        gap: 50px;
+    }
+    .nav-links a, .nav-links2 a {
+        text-decoration: none;
+        color: black;
+        font-size: 1rem;
+        font-family: Poppins, Arial, Helvetica, sans-serif; /* Using Poppins for navigation */
+        cursor: pointer;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+        padding: 5px 0 ;
+    }
+    
+    /* Underline Bar Styles */
+    .nav-links a::after{
+        content: '';
+        position:absolute;
+        height: 3px;
+        background-color: black;
+        left:0;
+        bottom:0;
+        width: 100%;
+        width:0;
+        opacity:0;
+        transition: width 0.3s ease-in, opacity 0.3s ease-in;
+    }
+    .nav-links a.active::after{
+        width: 100%;
+        opacity:1;
     }
 
-    .nav-links a:hover {
-      color: #347433;
+    .nav-links a:hover::after{
+        width:100%;
+        opacity:1;
     }
 
+    /* Logo and Header Text */
     .header-class {
-      height: 60px;
-      width: auto;
+        height: 100%; 
+        width: 350px; 
+        display: flex; 
+        align-items: center; 
+        flex-shrink: 0; 
+        padding-right: 5px; 
+    }
+    
+    .header-class img {
+        height: 100%; 
+        width: 70px; 
+        max-width: none; 
+        object-fit: contain; 
+        object-position: left; 
+        margin-right: 10px; 
+        cursor: pointer;
+    }
+    
+    .header-class p {
+        margin: 0; 
+        line-height: 1.2; 
+        font-weight: 500; 
+        font-size: 1.5rem; 
+        color: #3E6148;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif,Poppins;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
     }
 
-    .header-class img {
-      height: 100%;
-      width: auto;
-      object-fit: contain;
+    /* Hamburger Icon Container */
+    .hamburger-div{
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 50px; 
+        background-color: inherit; 
+        height:50px;
+        justify-content: center;
+        /* Pushes hamburger to the far right */
+        margin-left: 200px;
+        margin-right: 10px;
+        cursor: pointer;
     }
+
+    /* Hamburger Lines */
+    .line{
+        width: 100%;
+        height: 5px;
+        background-color: black;
+        /* Smooth transition for the X-cross transformation */
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;          
+    }
+    
+    /* X-CROSS ANIMATION (Triggered by the .open class on the sibling .side-menu) */
+
+    /* Line 1: Moves down and rotates clockwise */
+    .side-menu.open ~ header .hamburger-div .line1 { 
+        transform: translateY(10px) rotate(45deg);
+    }
+
+    /* Line 2: Hides */
+    .side-menu.open ~ header .hamburger-div .line2 {
+        opacity: 0;
+    }
+
+    /* Line 3: Moves up and rotates counter-clockwise */
+    .side-menu.open ~ header .hamburger-div .line3 {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    /* ======================================================= */
+    /* SLIDING SIDE MENU STYLES */
+    /* ======================================================= */
+    .side-menu {
+        position: fixed;
+        top: 0;
+        height: 100vh; 
+        width: 300px; 
+        background-color: #fcfcfc; 
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 998; 
+        right: -300px; 
+        transition: right 0.4s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    /* SLIDING IN: OVERRIDE THE right PROPERTY */
+    .side-menu.open {
+        right: 0; /* Brings the panel into view */
+    }
+
+    /* STYLING THE VERTICAL MENU CONTENTS */
+    .menu-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .menu-header img {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .menu-header p {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #3E6148;
+        font-family: 'Montserrat', sans-serif;
+        text-transform: none; /* Keep descriptive title from being uppercase */
+    }
+
+    .menu-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column; /* Stacks links vertically */
+        gap: 15px;
+        padding: 0;
+    }
+
+    .menu-links a {
+        text-decoration: none;
+        color: #3E6148;
+        font-family: Poppins, Arial, Helvetica, sans-serif;
+        font-size: 1.2rem;
+        padding: 10px 0;
+        display: block;
+        border-bottom: 1px solid #eee;
+    }
+    
+    /* End New Navbar Styles */
+    /* ==================================== */
 
     /********** HEADER **********/
     .header {
@@ -79,23 +257,18 @@
       justify-content: center;
       align-items: center;
       text-align: center;
-      background: linear-gradient(
-        180deg,
-        rgba(93, 134, 108, 1) 9%,
-        rgba(245, 245, 240, 1) 25%,
-        rgba(194, 166, 140, 1) 100%
-      );
+      background: #FFFFFF;
       padding: 20px;
     }
 
     .header h1 {
-      font-family: "Times New Roman", Times, serif;
       font-size: 3rem;
     }
 
     .header h4 {
       font-weight: 300;
       font-size: 1rem;
+      text-transform: none; 
     }
 
     /********** CONTENT **********/
@@ -120,7 +293,7 @@
       padding: 6px 12px;
       font-size: 0.9rem;
       cursor: pointer;
-      background-color: white;
+      background-color: white; 
       transition: background-color 0.2s ease;
     }
 
@@ -135,7 +308,7 @@
     }
 
     .folder {
-      background-color: white;
+      background-color: #f9f8f8;
       border-radius: 10px;
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -155,8 +328,9 @@
     .folder h4 {
       margin: 10px 20px 0;
       font-size: 1.1rem;
-      font-weight: 600;
+      font-weight: 600; 
       color: #347433;
+      text-transform: none; 
     }
 
     .folder p {
@@ -193,6 +367,7 @@
     .footerContainer1 h3 {
       font-size: 1rem;
       font-weight: 400;
+      text-transform: none; 
     }
 
     .socialIcons {
@@ -213,30 +388,24 @@
       color: #E2C88D;
     }
 
-    /********** RESPONSIVENESS **********/
+    /********** RESPONSIVENESS (Adjusted to match new nav structure) **********/
     @media (max-width: 1024px) {
-      .nav-links {
-        gap: 25px;
+      /* Hide regular navigation links and center container on smaller screens */
+      .nav-center-container {
+          display: none;
       }
-      .header h1 {
-        font-size: 2.5rem;
+      .hamburger-div {
+          /* Move hamburger to a reasonable spot */
+          margin-left: auto;
+          margin-right: 0;
+      }
+      .header-class {
+        /* Allow logo to shrink a bit */
+        width: auto;
       }
     }
 
     @media (max-width: 768px) {
-      .navbar {
-        flex-direction: column;
-        height: auto;
-        padding: 10px;
-      }
-
-      .nav-links {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 15px;
-        padding-top: 10px;
-      }
-
       .header h1 {
         font-size: 2rem;
       }
@@ -271,21 +440,43 @@
 </head>
 
 <body>
-  <header>
-    <nav class="navbar">
-      <div class="header-class">
-        <img src="../images/logojccnew 2.png" alt="JCC Logo" />
+  <div class="side-menu" id="sideMenu">
+      <div class="menu-header">
+          <img src="../../images/urora.png.PNG" alt="Logo">
+          <p>Jcc Usa</p>
       </div>
-      <ul class="nav-links">
-        <li><a href="../index.html">Home</a></li>
-        <li><a href="../About/About.html">About Us</a></li>
-        <li><a href="../Merch/merch.html">Pre-Sale Merch</a></li>
-        <li><a href="../index.html">Countdown</a></li>
-        <li><a href="../Gallery/Gallery.html">Gallery</a></li>
-        <li><a href="../Contact/contact.html">Contact Us</a></li>
+      <ul class="menu-links">
+        <li><a href ="/About/About3.html" > About Us </a></li>
+        <li><a href ="/i.html"> Events </a></li>
+        <li><a href ="../Gallery/Gallery.html" class ="active"> Gallery </a></li>
+        <li><a href ="../Contact/c.html"> Contact Us  </a></li>
       </ul>
+  </div>
+
+  <header>
+    <nav class ="navbar">
+        <div class="header-class">
+            <img src="../../images/urora.png.PNG" alt="Logo">
+            <p>Jcc Usa  </p>
+        </div>
+        
+        <div class="nav-center-container">
+            <ul class ="nav-links">
+                
+              <li><a href ="/About/About3.html" > About Us </a></li>
+              <li><a href ="/i.html"> Events </a></li>
+              <li><a href ="../Gallery/Gallery.html" class ="active"> Gallery </a></li>
+              <li><a href ="../Contact/c.html"> Contact Us  </a></li>
+            </ul>
+        </div>
+        
+        <div  class ="hamburger-div" id="hamburger">
+            <div class = " line line1"></div>
+            <div class = " line line2"></div>
+            <div class = " line line3"></div>
+        </div> 
     </nav>
-  </header>
+    </header>
 
   <div class="header">
     <h1>Gallery</h1>
@@ -326,8 +517,8 @@
 
   <footer>
     <div class="footerContainer1">
-      <img src="../images/logojccnew.png" alt="JCC logo" />
-      <h3>JCC USA NATIONAL COMMITTEE</h3>
+      <img src="../../images/urora.png.PNG" alt="JCC logo" />
+      <h3>JCC USA</h3>
     </div>
     <div class="socialIcons ease-in">
       <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
@@ -335,5 +526,20 @@
       <a href="#"><i class="fa-brands fa-facebook"></i></a>
     </div>
   </footer>
+  
+  <script>
+    // Wait for the DOM to fully load before trying to find the elements
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu = document.getElementById('sideMenu'); 
+
+        if (hamburger && sideMenu) {
+            hamburger.onclick = function() {
+                // Toggles the 'open' class on the side menu element
+                sideMenu.classList.toggle('open');
+            };
+        }
+    });
+</script>
 </body>
 </html>

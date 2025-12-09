@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christian Café 2025 - Complete Page</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  
+  <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Lora:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+
+
+  <style>
+    /* ==================================== */
+    /* BASE & TYPOGRAPHY - CUSTOMIZED */
+    /* ==================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100vh;
+      font-family: 'Lora', serif;
+      color: #3e6148;
+      background-color: #FFFFFF;
+      background: none;
+      background-attachment: scroll;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 300;
+        text-transform: uppercase;
+    }
+
+    .ctp-color {
+      color: #4f8355;
+    }
+    
+    .content-area {
+        margin: 0 200px;
+        flex: 1;
+        padding-top: 20px;
+    }
+    
+    @media (max-width: 1200px) {
+      .content-area {
+        margin: 0 50px;
+      }
+    }
+    @media (max-width: 768px) {
+      .content-area {
+        margin: 0 20px;
+      }
+    }
+
+    /* ==================================== */
+    /* NAVBAR - COMBINED STYLES */
+    /* ==================================== */
+    .navbar {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        display: flex;
+        justify-content: flex-start; 
+        align-items: center; 
+        z-index: 1000;
+        background-color: #FFFCFB;
+        height: 70px;
+        padding: 0 30px; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .nav-center-container {
+        flex-grow: 1; 
+        display: flex;      
+        justify-content: center; 
+        align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin-right: 20px;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 1rem;
+      font-family: Poppins, Arial, Helvetica, sans-serif;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      letter-spacing: 2px;
+      position: relative;
+      display: inline-block;
+      padding: 5px 0 ;
+    }
+
+
+    /* Underline Bar Styles */
+    .nav-links a::after{
+        content: '';
+        position:absolute;
+        height: 3px;
+        background-color: black;
+        left:0;
+        bottom:0;
+        width: 100%;
+        width:0;
+        opacity:0;
+        transition: width 0.3s ease-in, opacity 0.3s ease-in;
+    }
+    .nav-links a.active::after,
+    .nav-links a:hover::after{
+        width: 100%;
+        opacity:1;
+    }
+
+    .header-class {
+        height: 100%; 
+        width: 350px; 
+        display: flex; 
+        align-items: center; 
+        flex-shrink: 0; 
+        padding-right: 5px; 
+    }
+    
+    .header-class img {
+      height: 80%;
+      width: 70px;
+      object-fit: cover;
+      object-position: center;
+      margin-right: 10px; 
+      cursor: pointer;
+    }
+
+    .header-class p {
+        margin: 0; 
+        line-height: 1.2; 
+        font-weight: 500; 
+        font-size: 1.5rem; 
+        color: #3E6148;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif,Poppins;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+
+    /* Hamburger Icon Container - MAINTAINING YOUR ORIGINAL DESKTOP STYLES */
+    .hamburger-div{
+        display: flex; /* Kept visible on all screen sizes as per your request */
+        flex-direction: column;
+        gap: 5px;
+        width: 50px; 
+        background-color: inherit; 
+        height:50px;
+        justify-content: center;
+        margin-left: 200px; /* Keeping original spacing for desktop */
+        margin-right: 10px;
+        cursor: pointer;
+    }
+
+    /* Hamburger Lines */
+    .line{
+        width: 100%;
+        height: 5px;
+        background-color: black;
+        transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;          
+    }
+    
+    /* X-CROSS ANIMATION */
+    .side-menu.open ~ header .hamburger-div .line1 { 
+        transform: translateY(10px) rotate(45deg);
+    }
+    .side-menu.open ~ header .hamburger-div .line2 {
+        opacity: 0;
+    }
+    .side-menu.open ~ header .hamburger-div .line3 {
+        transform: translateY(-10px) rotate(-45deg);
+    }
+
+    /* SLIDING SIDE MENU STYLES */
+    .side-menu {
+        position: fixed;
+        top: 0;
+        height: 100vh; 
+        width: 300px; 
+        background-color: #fcfcfc; 
+        box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+        z-index: 998; 
+        right: -300px; 
+        transition: right 0.4s ease-in-out;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+    .side-menu.open {
+        right: 0; 
+    }
+    .menu-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #ddd;
+    }
+    .menu-header img {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+    .menu-header p {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #3E6148;
+    }
+    .menu-links {
+        list-style: none;
+        display: flex;
+        flex-direction: column; 
+        gap: 15px;
+        padding: 0;
+    }
+    .menu-links a {
+        text-decoration: none;
+        color: #3E6148;
+        font-family: Poppins, Arial, Helvetica, sans-serif;
+        font-size: 1.2rem;
+        padding: 10px 0;
+        display: block;
+        border-bottom: 1px solid #eee;
+    }
+
+
+    /* ==================================== */
+    /* SECTION 1: HERO/COUNTDOWN */
+    /* ==================================== */
+    .background {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 50px 0;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 0;
+    }
+
+    .center-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: black;
+      z-index: 1;
+      gap: 40px;
+      margin-bottom: 50px;
+      padding: 0 20px;
+    }
+
+    .center-text h1 {
+      color: #4f8355;
+      font-size: 5rem;
+      font-weight: 300;
+      font-family: anton;
+    }
+
+    .ct-p {
+      font-size: 1.5rem;
+      font-family: 'Lora', serif;
+    }
+
+    .ct-p1 {
+      font-size: 1.2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .button1, .button2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .button1 { background-color: #4f8355; }
+    .button2 { background-color: #e2c88d; color: #3e6148; }
+
+    /* COUNTDOWN BOX */
+    .mini-countdown-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 20px; 
+        background-color: rgba(255, 255, 255, 0.9); 
+        padding: 15px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1; 
+    }
+    .mini-countdown-container .time {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #4F8355;
+    }
+    .mini-countdown-container .time h4 {
+        font-size: 2.5rem; 
+        font-weight: 700;
+        margin-bottom: 5px;
+        line-height: 1;
+        font-family: 'Lora', serif;
+    }
+    .mini-countdown-container .time p {
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+
+    /* ==================================== */
+    /* SECTION 2: GUIDE */
+    /* ==================================== */
+    .guide-section {
+        padding: 80px 20px;
+        text-align: center;
+    }
+    .guide-section h2 {
+        font-size: 3rem;
+        margin-bottom: 40px;
+        color: #3e6148;
+    }
+    .guide-content {
+        background-color: #fafafa;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    .guide-content p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #555;
+    }
+
+    /* ==================================== */
+    /* SECTION 3: MERCH */
+    /* ==================================== */
+    .merch-section {
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+    }
+    .merch-section .text-content {
+      text-align: center;
+      margin-bottom: 30px;
+      width: 100%;
+    }
+    .merch-section .text-content h2 {
+      font-size: 3rem;
+      font-weight: 300;
+      color: #4f8355;
+    }
+    .grid-container {
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr; 
+        width: 100%;
+        height: 400px;
+        border-radius: 10px;
+        overflow: hidden;
+        margin-top: 20px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    }
+    .items { 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .image {
+        background-color: #3E6148; 
+        grid-column: span 3;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 1.5rem;
+    }
+    .text {
+        background-color: rgba(226, 181, 154, 0.5); 
+        grid-column: span 2;
+        padding: 20px 30px;
+    }
+    .text h2 {
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+    .text p {
+        font-size: 1rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+    }
+    .timeline { 
+        display: flex;
+        gap: 10px;
+        margin: 0 0 15px 0;
+    }
+    .timeline > div {
+        border-radius: 15px;
+        border: 1px solid #d1d5db;
+        padding: 5px 10px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        background-color: white; 
+        font-family: 'Lora', serif;
+        text-transform: none;
+    }
+    .timeline > div:hover {
+        background-color: #f0f0f0;
+    }
+    .green {
+        background-color: #CCEABB !important;
+        color: #1B4B36 !important;
+        border: none !important;
+    }
+    .gold{
+        background-color: rgba(226, 181, 154, 0.9) !important;
+        color:#957C62 !important;
+        border: none !important;
+    }
+    .gray{
+        background-color: #C9CDCF !important;
+        color:#44444E !important;
+        border: none !important;
+    }
+    .options {
+        margin : 20px 0;
+        justify-content: center;
+        width: 100%;
+    }
+    .grid-container2 {
+        display: grid; 
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-auto-rows: 400px; 
+        width: 100%;
+        max-width: 1200px;
+        margin-top: 40px;
+        gap: 20px;
+    }
+    .card {
+        background-color: transparent; 
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); 
+    }
+    .wrapper {
+        width: 100%; 
+        height: 100%;
+        background-color: white;
+        color: #3E6148;
+        border-radius: 10px;
+        overflow: hidden;
+        font-weight: 200;
+    }
+    .merch-img {
+        width : 100%;
+        height: 75%; 
+        object-fit: cover;
+        object-position: center;
+        display: block;
+    }
+    .wrapper > h3 {
+        margin: 10px 0 0 20px;
+        text-transform: none;
+        font-family: 'Lora', serif;
+        font-weight: 700;
+    }
+    .wrapper_2{
+        display:flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap:10px;
+        margin: 10px 0;
+    }
+    .Cart {
+        width: 70%;
+        flex: 1; 
+        background-color: #4F8355;
+        color: white;
+        padding: 10px;
+        border: none;
+        border-radius: 8px; 
+        cursor: pointer;
+        text-align: center;
+        font-weight: bold;
+        transition: background-color 0.2s;
+        margin-bottom: 10px;
+        font-family: 'Montserrat', sans-serif;
+    }
+    .Cart:hover {
+        background-color: #3E6148;
+    }
+    .footer-Notes{
+        width: 100%;
+        padding: 20px;
+        background-color: white;
+        margin: 30px 0;
+        border-radius: 8px;
+        border: 1px solid #eee;
+    }
+    .footer-Notes h3 {
+        margin-bottom: 10px;
+    }
+    .footer-Notes p{
+        color: gray;
+        font-weight: 400;
+    }
+    
+    /* ==================================== */
+    /* FOOTER */
+    /* ==================================== */
+    footer {
+      background-color: #4f8355;
+      padding: 20px 0;
+      color: white;
+      text-align: center;
+      margin-top: auto;
+      width: 100%;
+    }
+
+    .footerContainer1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footerContainer1 img {
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 5px;
+      object-fit: contain;
+    }
+
+    .footerContainer1 h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: white;
+      margin: 0;
+      text-transform: none;
+    }
+
+    .socialIcons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .socialIcons a {
+      text-decoration: none;
+      padding: 6px;
+      border-radius: 50%;
+    }
+
+    .socialIcons a i {
+      font-size: 1.4em;
+      color: white;
+      opacity: 0.9;
+      transition: color 0.3s ease;
+    }
+
+    .socialIcons a i:hover {
+      color: #e2c88d;
+    }
+
+    /* ==================================== */
+    /* RESPONSIVE DESIGN FIXES (Below 992px) */
+    /* ==================================== */
+    @media (max-width: 992px) {
+      /* FIX: Hide the full navigation links only on smaller screens */
+      .nav-center-container { 
+        display: none; 
+      }
+      
+      /* ADJUSTMENT: Recenter the logo/text and push the hamburger to the right on small screens */
+      .navbar {
+        justify-content: space-between; /* Space out logo and hamburger */
+        padding: 0 20px;
+      }
+
+      .header-class {
+        width: auto; /* Allow logo area to shrink */
+        flex-shrink: 1; 
+      }
+      
+      /* Remove the large left margin on hamburger so it aligns to the right */
+      .hamburger-div { 
+        margin-left: 0; 
+        margin-right: 0;
+      }
+      
+      /* General mobile adjustments */
+      .center-text h1 { font-size: 3.5rem; }
+      .ct-p { font-size: 1.2rem; }
+      .grid-container { height: auto; grid-template-columns: 1fr; grid-template-rows: auto auto; }
+      .image { grid-column: span 1; height: 300px; }
+      .text { grid-column: span 1; }
+      .grid-container2 { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      /* Further mobile/tablet adjustments */
+      .center-text h1 { font-size: 2.5rem; }
+      .mini-countdown-container { gap: 15px; padding: 10px 20px; }
+      .mini-countdown-container .time h4 { font-size: 2rem; }
+      .grid-container2 { grid-template-columns: 1fr; }
+      .merch-section .text-content h2, .guide-section h2 { font-size: 2.2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .center-text h1 { font-size: 2rem; }
+      .ct-p { font-size: 1rem; }
+      .buttons { flex-direction: column; width: 90%; margin: 0 auto; }
+      .button1, .button2 { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+    
+  <div class="side-menu" id="sideMenu">
+    <div class="menu-header">
+        <img src="../../images/urora.png.PNG" alt="Logo">
+        <p>Jcc Usa</p>
+    </div>
+    <ul class="menu-links">
+      <li><a href ="/About/About3.html" > About Us </a></li>
+      <li><a href ="/i.html" class ="active"> Events </a></li>
+      <li><a href ="../Gallery/Gallery.html"> Gallery </a></li>
+      <li><a href ="../Contact/c.html"> Contact Us  </a></li>
+    </ul>
+  </div>
+    
+  <header>
+    <nav class ="navbar">
+        <div class="header-class">
+            <img src="../../images/urora.png.PNG"alt="Logo"> <p>Jcc Usa</p>
+        </div>
+        
+        <div class="nav-center-container">
+            <ul class ="nav-links">
+              <li><a href ="/About/About3.html" > About Us </a></li>
+              <li><a href ="/i.html"class ="active"> Events </a></li>
+              <li><a href ="../Gallery/Gallery.html"> Gallery </a></li>
+              <li><a href ="../Contact/c.html"> Contact Us  </a></li>
+            </ul>
+        </div>
+        
+        <div  class ="hamburger-div" id="hamburger">
+            <div class = " line line1"></div>
+            <div class = " line line2"></div>
+            <div class = " line line3"></div>
+        </div> 
+    </nav>
+  </header>
+
+  <div class="background">
+    <div class="overlay"></div>
+
+    <div class="center-text">
+      <div class="text1">
+        <h1>CHRISTIAN CAFÉ 2025</h1>
+        <p class="ct-p ctp-color">
+          "From God's Original Plan to Deliverance from Darkness."
+        </p>
+        <p class="ct-p1 ctp-color">Isaiah 49:1-26</p>
+      </div>
+      
+      <div class="mini-countdown-container">
+        <div class="time">
+          <h4 id="days">00</h4>
+          <p>DAYS</p>
+        </div>
+        <div class="time">
+          <h4 id="hours">00</h4>
+          <p>HOURS</p>
+        </div>
+        <div class="time">
+          <h4 id="minutes">00</h4>
+          <p>MINUTES</p>
+        </div>
+        <div class="time">
+          <h4 id="seconds">00</h4>
+          <p>SECONDS</p>
+        </div>
+      </div>
+      <div class="buttons">
+        <a href="#" class="button1">
+          <p>JOIN US IN ATLANTA</p>
+        </a>
+        <a href="#" class="button2">
+          <p>BOOK YOUR MERCH</p>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <main class="content-area">
+    
+    <div id="guide-section" class="guide-section">
+        <h2>Guide</h2>
+        <div class="guide-content">
+            <p>
+                **Placeholder Content for the Guide Section**
+                <br><br>
+                This area is dedicated to providing attendees with useful information about the Christian Café 2025 event, 
+                including hotel directions, schedule highlights, speaker biographies, and local Atlanta tips.
+                <br><br>
+                *More detailed content will be added here soon.*
+            </p>
+        </div>
+    </div>
+    
+    <hr style="margin: 50px auto; width: 80%;">
+
+    <div id="merch-section" class="merch-section">
+      <div class="text-content">
+        <h2>Merch</h2>
+      </div>
+      <div class="grid-container">
+          <div class="items image">
+              <img src="https://placehold.co/600x400/3E6148/ffffff?text=Header+Image+3/5" alt="Merch display" class-="merch-img" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
+          <div class="items text">
+              <h2>Pre-Sale Merch</h2>
+              <p>Every purchase helps fund ministry logistics, outreach, and youth programs, investing in God's kingdom means sowing into transformed lives and expanded impact.</p>
+              <div class="timeline">
+                  <div class="green">Official</div>
+                  <div class="gold">Limited run</div>
+                  <div class="gray">Secure checkout</div>
+              </div>
+          </div>
+      </div>
+
+      <div class="timeline options">
+          <div class = "green">All</div>
+          <div>Apperel</div>
+          <div class="gray">Accesories</div>
+          <div>Fabric</div>
+      </div>
+
+      <div class="grid-container2">
+          <div class="card">
+              <div class="wrapper">
+                  <img class="merch-img" src="https://placehold.co/400x400/E2B59A/3E6148?text=African+Fabric" alt="merch">
+                  <div class="wrapper_2">
+                      <h3>Cozy Hoodie</h3>
+                      <button class="Cart">Book</button>
+                  </div>
+              </div>
+          </div>
+          <div class="card">
+              <div class="wrapper">
+                  <img class="merch-img" src="https://placehold.co/400x400/3E6148/FFFFFF?text=Green+T-Shirt" alt="merch">
+                  <div class="wrapper_2">
+                      <h3>Signature T-shirt</h3>
+                      <button class="Cart">Book</button>
+                  </div>
+              </div>
+          </div>
+          <div class="card">
+              <div class="wrapper">
+                  <img class="merch-img" src="https://placehold.co/400x400/C9CDCF/44444E?text=Grey+Hoodie" alt="merch">
+                  <div class="wrapper_2">
+                      <h3>Cozy Hoodie</h3>
+                      <button class="Cart">Book</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="footer-Notes">
+          <h3>Pickup at the Event Hotel</h3>
+          <p>All pre-sale merchandise will be available for pickup at the event hotel during Christian Café weekend. Please bring 
+              your order confirmation and ID. If you're purchasing for someone else, add their name in the order notes.
+          </p>
+      </div>
+
+    </div>
+  </main>
+  
+  <footer>
+    <div class="footerContainer1">
+      <img src="../../images/urora.png.PNG" alt="JCC logo" />
+      <h3>JCC USA </h3>
+    </div>
+    <div class="footerContainer">
+      <div class="socialIcons ease-in">
+        <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+        <a href=""><i class="fa-brands fa-instagram"></i></a>
+        <a href=""><i class="fa-brands fa-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Event starts December 21, 2025 at 5:00 PM
+    const targetDate = new Date("December 21, 2025 17:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      // Time calculations
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Update the countdown box elements
+      document.getElementById("days") && (document.getElementById("days").textContent = days.toString().padStart(2, "0"));
+      document.getElementById("hours") && (document.getElementById("hours").textContent = hours.toString().padStart(2, "0"));
+      document.getElementById("minutes") && (document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0"));
+      document.getElementById("seconds") && (document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0"));
+
+      // Check if the event has started
+      if (distance < 0) {
+        clearInterval(countdown);
+        // Display a message in the countdown box
+        const countdownContainer = document.querySelector('.mini-countdown-container');
+        if (countdownContainer) {
+            countdownContainer.innerHTML = '<h2 style="color: #4F8355; font-size: 1.5rem; font-family: \'Lora\', serif;">The Event Has Started! 🎉</h2>';
+        }
+      }
+    }, 1000);
+
+
+    // Hamburger Menu Script
+    document.addEventListener('DOMContentLoaded', function() {
+        const hamburger = document.getElementById('hamburger');
+        const sideMenu = document.getElementById('sideMenu'); 
+
+        if (hamburger && sideMenu) {
+            hamburger.onclick = function() {
+                // Toggles the 'open' class on the side menu element
+                sideMenu.classList.toggle('open');
+            };
+        }
+    });
+  </script>
+</body>
+</html>

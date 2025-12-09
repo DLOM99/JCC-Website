@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Christian Café 2025 - Full Scrollable Page</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <link href='https://fonts.googleapis.com/css?family=Anton' rel='stylesheet'>
+
+  <style>
+    /* ==================================== */
+    /* BASE & TYPOGRAPHY */
+    /* ==================================== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      min-height: 100vh;
+      font-family: "Arial", sans-serif;
+      color: #3e6148;
+      background-color: #FFFFFF;
+      background: url("images/ATL_SKYL.jpg") no-repeat center center / cover;
+      background-attachment: fixed;
+    }
+
+    .ctp-color {
+      color: #4f8355;
+    }
+
+    /* ==================================== */
+    /* HERO SECTION */
+    /* ==================================== */
+    .background {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      background: url("images/ATL_SKYL.jpg") no-repeat center center / cover;
+      background-attachment: fixed;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.8);
+      z-index: 0;
+    }
+
+    /* NAVBAR */
+    .navbar {
+      position: sticky;
+      top: 0;
+      left: 0;
+      width: 100%;
+      display: flex;
+      /* KEY FIX 1: Use flex-start to manually control spacing */
+      justify-content: flex-start;
+      align-items: center;
+      z-index: 10;
+      background-color: #FFFCFB;
+      height: 70px;
+      padding: 0 30px;
+    }
+
+    /* NEW STYLE: Container to push the links to the center */
+    .nav-center-container {
+        flex-grow: 1; /* Allows this container to take up all available space */
+        display: flex;
+        justify-content: center; /* Centers the list within the container */
+        align-items: center;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      /* Removed margin-right: 20px; to allow centering */
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: black;
+      font-size: 1rem;
+      font-family:  Gill Sans, sans-serif, Helvetica, sans-serif;
+      font-weight: 550;
+      cursor: pointer;
+      transition: color 0.3s ease;
+      font-variant: normal;
+    }
+
+    .nav-links a:hover {
+      color: #4f8355;
+    }
+
+    .header-class {
+      /* KEY FIX 2: Correct height and vertical alignment for the logo container */
+      height: 100%;
+      width: 70px;
+      /* Removed margin-top: 10px; */
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .header-class img {
+      /* KEY FIX 3: Ensure the image fits within the container */
+      height: 90%;
+      width: auto; /* Use auto to maintain aspect ratio */
+      object-fit: contain; /* Ensures the entire image is visible */
+      object-position: center;
+    }
+
+    /* HERO TEXT */
+    .center-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: black;
+      z-index: 1;
+      gap: 40px; /* Reduced gap slightly to account for the new element order */
+      font-family: "Times New Roman", "Playfair Display", serif;
+      margin-bottom: 50px;
+      padding: 0 20px;
+    }
+
+    .center-text h1 {
+      color: #4f8355;
+      font-size: 5rem;
+      font-weight: 300;
+      font-family: anton;
+    }
+
+    .ct-p {
+      font-size: 1.5rem;
+      font-family: public sans;
+    }
+
+    .ct-p1 {
+      font-size: 1.2rem;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      font-family: Arial, Helvetica, sans-serif;
+      margin-top: 0; 
+      margin-bottom: 20px; 
+    }
+
+    .button1,
+    .button2 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      height: 50px;
+      padding: 0 20px;
+      border-radius: 10px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    .button1 {
+      background-color: #4f8355;
+    }
+
+    .button2 {
+      background-color: #e2c88d;
+      color: #3e6148;
+    }
+
+    /* ==================================== */
+    /* COUNTDOWN BOX - NEW STYLES */
+    /* ==================================== */
+    .mini-countdown-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 15px 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+    }
+
+    .mini-countdown-container .time {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #4F8355;
+    }
+
+    .mini-countdown-container .time h4 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        line-height: 1;
+    }
+    
+    .mini-countdown-container .time p {
+        font-size: 0.9rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        margin: 0;
+    }
+    /* ==================================== */
+    /* MERCH SECTION */
+    /* ==================================== */
+    .merch-section {
+      padding: 80px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: white;
+    }
+
+    .merch-section .text-content {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .merch-section .text-content h2 {
+      font-size: 3rem;
+      font-weight: 300;
+      color: #4f8355;
+      font-family: "Times New Roman", Times, serif;
+    }
+
+    .merch-Content {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      width: 100%;
+      max-width: 1200px;
+      padding: 10px;
+    }
+
+    .unit {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      background-color: #faf8f1;
+      padding: 15px;
+      flex: 1;
+      max-width: 300px;
+      min-height: 400px;
+    }
+
+    .unit img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 10px;
+      background-color: #f0f0f0;
+      min-height: 150px;
+    }
+
+    .unit h3 {
+      margin-top: 10px;
+      font-weight: 400;
+      font-size: 1.2rem;
+    }
+
+    .order {
+      background-color: #e2c88d;
+      color: white;
+      padding: 10px 20px;
+      margin-top: auto;
+      cursor: pointer;
+      width: 80%;
+      border-radius: 10px;
+      font-family: Arial;
+      text-decoration: none;
+      display: block;
+    }
+
+    /* ==================================== */
+    /* FOOTER */
+    /* ==================================== */
+    footer {
+      background-color: #4f8355;
+      padding: 20px 0;
+      color: white;
+      text-align: center;
+    }
+
+    .footerContainer1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .footerContainer1 img {
+      width: 50px;
+      height: 50px;
+      background-color: white;
+      border-radius: 5px;
+      object-fit: contain;
+    }
+
+    .footerContainer1 h3 {
+      font-size: 1.2rem;
+      font-weight: 400;
+      color: white;
+      margin: 0;
+      font-family:  Gill Sans, sans-serif, Helvetica, sans-serif;
+
+    }
+
+    .socialIcons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .socialIcons a {
+      text-decoration: none;
+      padding: 6px;
+      border-radius: 50%;
+    }
+
+    .socialIcons a i {
+      font-size: 1.4em;
+      color: white;
+      opacity: 0.9;
+      transition: color 0.3s ease;
+    }
+
+    .socialIcons a i:hover {
+      color: #e2c88d;
+    }
+
+    .l-title{
+        font-weight: 900;
+        color:red;
+        font-size: 20px;
+    }
+
+
+    /* ==================================== */
+    /* RESPONSIVE DESIGN */
+    /* ==================================== */
+    @media (max-width: 992px) {
+      .center-text h1 {
+        font-size: 3.5rem;
+      }
+      .ct-p {
+        font-size: 1.2rem;
+      }
+      .nav-links {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 10px;
+      }
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .center-text h1 {
+        font-size: 2.5rem;
+      }
+      .mini-countdown-container {
+        gap: 15px;
+        padding: 10px 20px;
+      }
+      .mini-countdown-container .time h4 {
+        font-size: 2rem;
+      }
+      .merch-section .text-content h2 {
+        font-size: 2.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .center-text h1 {
+        font-size: 2rem;
+      }
+      .ct-p {
+        font-size: 1rem;
+      }
+      .button1,
+      .button2 {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="header-class">
+        <img src="../images/urora.png.PNG" alt="Logo" />
+      </div>
+      
+      <div class="nav-center-container">
+          <ul class="nav-links">
+            
+            <li><a href="../About/About.html">About Us</a></li>
+            <li><a href="../Merch/merch.html">Pre-Sale Merch</a></li>
+            <li><a href="../Gallery/Gallery.html">Gallery</a></li>
+            <li><a href="../Contact/contact.html">Contact Us</a></li>
+          </ul>
+      </div>
+      
+      <div style="width: 70px;"></div>
+
+    </nav>
+  </header>
+
+  <div class="background">
+    <div class="overlay"></div>
+
+    <div class="center-text">
+      <div class="text1">
+        <h1>CHRISTIAN CAFÉ 2025</h1>
+        <p class="ct-p ctp-color">
+          "From God's Original Plan to Deliverance from Darkness."
+        </p>
+        <p class="ct-p1 ctp-color">Isaiah 49:1-26</p>
+      </div>
+      
+      <div class="buttons">
+        <a href="#" class="button1">
+          <p>JOIN US IN ATLANTA</p>
+        </a>
+        <a href="#" class="button2">
+          <p>BOOK YOUR MERCH</p>
+        </a>
+      </div>
+      
+      <div class="mini-countdown-container">
+        <div class="time">
+          <h4 id="days">00</h4>
+          <p>DAYS</p>
+        </div>
+        <div class="time">
+          <h4 id="hours">00</h4>
+          <p>HOURS</p>
+        </div>
+        <div class="time">
+          <h4 id="minutes">00</h4>
+          <p>MINUTES</p>
+        </div>
+        <div class="time">
+          <h4 id="seconds">00</h4>
+          <p>SECONDS</p>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+  <main>
+    <div id="merch" class="merch-section">
+      <div class="text-content">
+        <h2 class="l-title" style ="font-weight: 900;font-family: Specific Sans-Serif Font;">BOOK YOUR MERCH HERE</h2>
+      </div>
+      <div class="merch-Content">
+        <div class="unit">
+          <img src="" alt="White shirt" />
+          <h3>White T-Shirt</h3>
+          <a href="#" class="order">
+            <p>Book Here</p>
+          </a>
+        </div>
+        <div class="unit">
+          <img src="" alt="Green T-shirt" />
+          <h3>Green T-Shirt</h3>
+          <a href="#" class="order">
+            <p>Book Here</p>
+          </a>
+        </div>
+        <div class="unit">
+          <img src="" alt="Tote bag" />
+          <h3>Tote Bag</h3>
+          <a href="#" class="order">
+            <p>Book Here</p>
+          </a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footerContainer1">
+      <img src="../images/urora.png.PNG" alt="JCC logo" />
+      <h3>JCC USA </h3>
+    </div>
+    <div class="footerContainer">
+      <div class="socialIcons ease-in">
+        <a href=""><i class="fa-brands fa-x-twitter"></i></a>
+        <a href=""><i class="fa-brands fa-instagram"></i></a>
+        <a href=""><i class="fa-brands fa-facebook"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Event starts December 21, 2025 at 5:00 PM
+    const targetDate = new Date("December 21, 2025 17:00:00").getTime();
+
+    const countdown = setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      // Time calculations
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // Update the countdown box elements
+      document.getElementById("days").textContent = days.toString().padStart(2, "0");
+      document.getElementById("hours").textContent = hours.toString().padStart(2, "0");
+      document.getElementById("minutes").textContent = minutes.toString().padStart(2, "0");
+      document.getElementById("seconds").textContent = seconds.toString().padStart(2, "0");
+
+      // Check if the event has started
+      if (distance < 0) {
+        clearInterval(countdown);
+        // Display a message in the countdown box
+        const countdownContainer = document.querySelector('.mini-countdown-container');
+        if (countdownContainer) {
+            countdownContainer.innerHTML = '<h2 style="color: #4F8355; font-size: 1.5rem;">The Event Has Started! 🎉</h2>';
+        }
+      }
+    }, 1000);
+  </script>
+</body>
+</html>
