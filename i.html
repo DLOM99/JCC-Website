@@ -79,7 +79,7 @@
         justify-content: flex-start; 
         align-items: center; 
         z-index: 1000;
-        background-color: #FFFCFB;
+        background-color: #FFFCFC;
         height: 70px;
         padding: 0 30px; 
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
@@ -383,43 +383,33 @@
         color: #555;
     }
     
-    /* ==================================== */
-    /* SECTION 2: GUIDE - IMAGE CAROUSEL STYLES (UPDATED HEIGHT) */
-    /* ==================================== */
-    .image-carousel-container {
-        position: relative;
-        max-width: 100%;
-        margin-top: 30px;
-    }
-    .image-slider-wrapper {
-        display: flex;
-        overflow-x: auto; /* Enables horizontal scrolling */
-        scroll-snap-type: x mandatory; /* Makes it snap to each image */
-        gap: 15px;
-        padding-bottom: 10px; /* Space for scrollbar */
-        -webkit-overflow-scrolling: touch; /* iOS smooth scrolling */
-        scrollbar-width: none; /* Firefox */
-        border-radius: 10px;
-    }
-    .image-slider-wrapper::-webkit-scrollbar {
-        display: none; /* Chrome, Safari, Opera */
-    }
-    
-    .image-slide {
-        flex: 0 0 auto; /* Prevents slides from shrinking */
-        width: 350px; /* Width remains at 350px */
-        height: 450px; /* Increased height to 450px for a taller look */
-        background-color: #d8d8d8; /* Placeholder color */
-        border-radius: 8px;
+    /* IFRAME EMBED STYLES for Canva */
+    .iframe-container {
+        position: relative; 
+        width: 100%; 
+        height: 0; 
+        /* UPDATED: Reduced padding-top to shorten the height (4:3 aspect ratio) */
+        padding-top: 75%; 
+        padding-bottom: 0; 
+        box-shadow: 0 2px 8px 0 rgba(63,69,81,0.16); 
+        margin-top: 30px; 
+        margin-bottom: 0.9em; 
         overflow: hidden;
-        scroll-snap-align: start; /* Snap to the start of the slide */
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for visual separation */
+        border-radius: 8px; 
+        will-change: transform;
+        max-width: 800px; 
+        margin-left: auto;
+        margin-right: auto;
     }
-    .image-slide img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        display: block;
+    .iframe-container iframe {
+        position: absolute; 
+        width: 100%; 
+        height: 100%; 
+        top: 0; 
+        left: 0; 
+        border: none; 
+        padding: 0;
+        margin: 0;
     }
 
 
@@ -694,11 +684,7 @@
       .text { grid-column: span 1; }
       .grid-container2 { grid-template-columns: 1fr 1fr; }
       
-      /* Responsive adjustments for the carousel */
-      .image-slide {
-          width: 300px; 
-          height: 350px; /* Adjusted height for tablet/mobile landscape */
-      }
+      
     }
 
     @media (max-width: 768px) {
@@ -709,11 +695,6 @@
       .grid-container2 { grid-template-columns: 1fr; }
       .merch-section .text-content h2, .guide-section h2 { font-size: 2.2rem; }
       
-      /* Responsive adjustments for the carousel */
-      .image-slide {
-          width: 90%; /* Takes up most of the screen width */
-          height: 400px; /* Adjusted height for mobile portrait */
-      }
     }
 
     @media (max-width: 480px) {
@@ -814,47 +795,23 @@
                 Use this guide to plan your trip. You'll find essential information about the event schedule, 
                 our featured speakers, directions to the main venues, and local tips for your stay in Atlanta.
                 <br><br>
-                *Scroll horizontally to view images of the venue and speakers.*
             </p>
             
-            <div class="image-carousel-container">
-                <div class="image-slider-wrapper">
-                    
-                    <div class="image-slide">
-                        <img src="#" alt="Event Venue Image 1">
-                    </div>
-                    
-                    <div class="image-slide">
-                        <img src="#" alt="Keynote Speaker Image">
-                    </div>
-
-                    <div class="image-slide">
-                        <img src="#" alt="Worship Team Image">
-                    </div>
-
-                    <div class="image-slide">
-                        <img src="#" alt="Hotel Image">
-                    </div>
-                    
-                    <div class="image-slide">
-                        <img src="#" alt="Event Map Preview">
-                    </div>
-                    
-                    <div class="image-slide">
-                        <img src="#" alt="Fellowship Area">
-                    </div>
-                    
-                    <div class="image-slide">
-                        <img src="#" alt="Workshop Session">
-                    </div>
-                    
-                    <div class="image-slide">
-                        <img src="#" alt="Atlanta Skyline">
-                    </div>
-
-                </div>
+            <div class="iframe-container">
+                 <iframe loading="lazy" 
+                   src="https://www.canva.com/design/DAG4oBNYA6Q/M1yebaVwuLgYicYAfnezOQ/view?embed" 
+                   allowfullscreen="allowfullscreen" 
+                   allow="fullscreen">
+                 </iframe>
             </div>
-            </div>
+            <a href="https:&#x2F;&#x2F;www.canva.com&#x2F;design&#x2F;DAG4oBNYA6Q&#x2F;M1yebaVwuLgYicYAfnezOQ&#x2F;view?utm_content=DAG4oBNYA6Q&amp;utm_campaign=designshare&amp;utm_medium=embeds&amp;utm_source=link" 
+               target="_blank" 
+               rel="noopener"
+               style="display: inline-block; margin-top: 10px; color: #4f8355; font-weight: bold; text-decoration: none;">
+                View Full Hotel Information
+            </a>
+            
+        </div>
     </div>
     
     <hr style="margin: 50px auto; width: 80%;">
